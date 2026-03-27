@@ -74,7 +74,7 @@ title: 智能家居
     <h3>APP下载</h3>
     <div class="app-download">
         <h4>安卓APP</h4>
-        <p>S点击下方链接下载尚网云家APP</p>
+        <p>点击下方链接下载尚网云家APP</p>
         <a href="http://www.bjzdzb.com/ztzlprofile/upload/%E5%B0%9A%E7%BD%91%E4%BA%91%E5%AE%B6APP%E5%AE%89%E5%8D%93%E7%89%88_20250529154515A036.apk" class="download-link">
             下载安卓APP
         </a>

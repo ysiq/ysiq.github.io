@@ -70,6 +70,9 @@ header {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     flex-shrink: 0;
     border: 1px solid #333;
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
 }
 
 .secondary-nav h3 {
