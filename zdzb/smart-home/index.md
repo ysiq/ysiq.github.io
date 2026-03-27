@@ -4,8 +4,8 @@ title: 智能家居
 ---
 
 <section class="smart-home-hero">
-    <h2>智能家居解决方案</h2>
-    <p>让您的家变得更加智能和便捷</p>
+    <h2>智能家居</h2>
+    <p>智能家庭解决方案</p>
 </section>
 
 <section class="smart-home-features">
@@ -17,15 +17,15 @@ title: 智能家居
         </div>
         <div class="feature-item">
             <h4>语音助手</h4>
-            <p>支持语音指令控制家居设备</p>
+            <p>支持语音指令控制智能家居</p>
         </div>
         <div class="feature-item">
             <h4>场景联动</h4>
-            <p>根据不同场景自动调整设备状态</p>
+            <p>根据场景自动调整设备状态</p>
         </div>
         <div class="feature-item">
             <h4>安全监控</h4>
-            <p>实时监控家居安全状况</p>
+            <p>实时监控家庭安全状况</p>
         </div>
     </div>
 </section>
@@ -35,15 +35,19 @@ title: 智能家居
     <div class="product-grid">
         <div class="product-item">
             <h4>智能灯具</h4>
-            <p>可调节亮度和色温的智能灯具</p>
+            <p>支持调节亮度和色温</p>
         </div>
         <div class="product-item">
             <h4>智能插座</h4>
-            <p>远程控制电器开关和用电量统计</p>
+            <p>远程控制电器开关</p>
         </div>
         <div class="product-item">
             <h4>智能门锁</h4>
-            <p>指纹识别和远程开锁功能</p>
+            <p>支持指纹和密码解锁</p>
+        </div>
+        <div class="product-item">
+            <h4>智能摄像头</h4>
+            <p>实时监控和录像</p>
         </div>
     </div>
 </section>

@@ -1,0 +1,6 @@
+# 公司产品配置
+name: 公司产品
+permalink: pretty
+highlighter: rouge
+exclude:
+  - README.md
