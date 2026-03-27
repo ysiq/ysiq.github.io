@@ -25,45 +25,94 @@
                     <li><a href="/zdzb/smart-home/gateway.html">智能网关</a></li>
                     <li><a href="/zdzb/smart-home/wall-switch.html">墙面开关</a></li>
                     <li><a href="/zdzb/smart-home/smart-curtain.html">智能窗帘</a></li>
+                    <li><a href="/zdzb/smart-home/socket.html">移动插座</a></li>
                 </ul>
             </nav>
         </aside>
         <section class="content">
             <section class="product-hero">
                 <h2>智能窗帘</h2>
-                <p>自动控制窗帘开合</p>
+                <p>远程控制、遥控器控制、手拉助力等功能</p>
             </section>
             <section class="product-features">
                 <h3>产品特点</h3>
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <h4>智能控制</h4>
-                        <p>通过手机APP远程控制</p>
+                        <h4>多种控制方式</h4>
+                        <p>手机百分比精度控制、遥控器控制、手拉控制</p>
                     </div>
                     <div class="feature-item">
-                        <h4>语音控制</h4>
-                        <p>支持语音助手控制</p>
+                        <h4>手拉启动</h4>
+                        <p>当窗帘停止时，通过手拉动窗帘后，窗帘自动继续向前移动</p>
                     </div>
                     <div class="feature-item">
-                        <h4>定时功能</h4>
-                        <p>设置定时开关</p>
+                        <h4>阻力检测</h4>
+                        <p>当窗帘移动时，可以通过手拉动窗帘阻止窗帘移动，窗帘电机检测到阻力后会自动停止</p>
                     </div>
                     <div class="feature-item">
-                        <h4>光感控制</h4>
-                        <p>根据光线自动调整</p>
+                        <h4>智能联动</h4>
+                        <p>支持定时、联动、场景功能</p>
                     </div>
                 </div>
             </section>
             <section class="product-specs">
                 <h3>技术参数</h3>
                 <ul class="specs-list">
-                    <li>工作电压：DC 12V</li>
-                    <li>电机功率：40W</li>
-                    <li>通信协议：Zigbee 3.0</li>
-                    <li>工作温度：-10℃ ~ 50℃</li>
-                    <li>最大负载：50kg</li>
-                    <li>控制方式：APP、语音、手动</li>
+                    <li>产品名称：智能窗帘电机</li>
+                    <li>产品型号：SZYJ-CL01</li>
+                    <li>产品尺寸：48×58×300mm</li>
+                    <li>产品净重：803g</li>
+                    <li>电源输入：220V交流50Hz</li>
+                    <li>工作环境：-5℃~50℃    0%~95%RH,无冷凝</li>
+                    <li>有线连接：RJ11 用于连接副电机（可无）</li>
+                    <li>无线连接：lora</li>
                 </ul>
+            </section>
+            <section class="product-usage">
+                <h3>安装说明</h3>
+                <ol>
+                    <li>电机安装好后，需要先连接电源线。双轨道窗帘两个电机都需要连接电源线。</li>
+                    <li>双轨道窗帘两个电机之间需要连接一条连接线。双轨道窗帘，只需要操作主电机就可以，从电机不需要操作。</li>
+                    <li>双轨道窗帘主电机需要安装在纱帘位置，副电机安装在布帘位置，这样可以与APP中的显示对应。</li>
+                </ol>
+                <h3>按键功能</h3>
+                <p>窗帘的按键有多种功能，通过检测按键按下的次数来执行相应的操作。在配置设备时，需要正确的按下按键：按下按键的时间应小于1秒，大于1秒后不处理，两次按键的间隔小于1秒，松开按键1秒后，会计算之前的按键次数。并且通过指示灯的闪烁次数提示给用户。</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>按键次数</th>
+                            <th>功能介绍</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>切换窗帘极性</td>
+                            <td>因轨道的安装问题，导致有时控制开实际是关，此时需要通过切换窗帘极性调整好方向，单轨道有两种模式，双轨道有四种模式，切换后操作窗帘开关，正确即可。</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>配对遥控器</td>
+                            <td>之后需要按下遥控器的任意按键，配对成功后。遥控器可以控制窗帘移动。</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>打开/关闭手拉启动功能</td>
+                            <td>手拉启动为当窗帘停止时，通过手拉动窗帘后，窗帘自动继续向前移动。默认打开，可以通过设置关闭。</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>检测窗帘长度</td>
+                            <td>首次安装窗帘电机或将电机移动到其他位置时，需要先检测出轨道长度。窗帘会自动关闭后打开，以此检测轨道长度。</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>设备入网</td>
+                            <td>设备进入入网态后，同样需要短按网关入网按键，允许设备入网，设备指示灯不再闪烁说明入网成功，然后APP扫码添加设备即可。</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
         </section>
     </main>
