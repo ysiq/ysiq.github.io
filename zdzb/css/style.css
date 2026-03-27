@@ -8,8 +8,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f9f9f9;
+    color: #fff !important;
+    background-color: #1a1a1a !important;
 }
 
 /* 头部样式 */
@@ -59,16 +59,16 @@ header {
 /* 侧边栏样式 */
 .sidebar {
     width: 250px;
-    background-color: #fff;
+    background-color: #2d2d2d !important;
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
 }
 
 .secondary-nav h3 {
     margin-bottom: 1rem;
-    color: #1a365d !important;
+    color: #fff !important;
     font-size: 1.1rem;
 }
 
@@ -81,7 +81,7 @@ header {
 }
 
 .secondary-nav ul li a {
-    color: #333;
+    color: #e2e8f0 !important;
     text-decoration: none;
     padding: 0.5rem;
     display: block;
@@ -90,24 +90,24 @@ header {
 }
 
 .secondary-nav ul li a:hover {
-    background-color: #e2e8f0;
-    color: #1a365d;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
 }
 
 /* 主内容区域样式 */
 .content {
     flex: 1;
-    background-color: #fff;
+    background-color: #2d2d2d !important;
     padding: 2rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* 产品页面样式 */
 .product-hero {
     text-align: center;
     margin-bottom: 3rem;
-    background-color: #e2e8f0 !important;
+    background-color: #1a365d !important;
     padding: 2rem;
     border-radius: 5px;
 }
@@ -115,12 +115,16 @@ header {
 .product-hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #1a365d !important;
+    color: #fff !important;
+}
+
+.product-hero p {
+    color: #e2e8f0 !important;
 }
 
 .product-list h3 {
     margin-bottom: 1.5rem;
-    color: #1a365d !important;
+    color: #fff !important;
 }
 
 .product-grid {
@@ -130,30 +134,30 @@ header {
 }
 
 .product-item {
-    background-color: #f9f9f9;
+    background-color: #3d3d3d !important;
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     text-decoration: none;
-    color: #333;
+    color: #e2e8f0 !important;
     transition: transform 0.3s ease;
 }
 
 .product-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .product-item h4 {
     margin-bottom: 0.5rem;
-    color: #1a365d !important;
+    color: #fff !important;
 }
 
 /* 智能家居样式 */
 .smart-home-hero {
     text-align: center;
     margin-bottom: 3rem;
-    background-color: #e2e8f0 !important;
+    background-color: #1a365d !important;
     padding: 2rem;
     border-radius: 5px;
 }
@@ -161,14 +165,18 @@ header {
 .smart-home-hero h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #1a365d !important;
+    color: #fff !important;
+}
+
+.smart-home-hero p {
+    color: #e2e8f0 !important;
 }
 
 .smart-home-features h3,
 .smart-home-products h3,
 .smart-home-advantages h3 {
     margin-bottom: 1.5rem;
-    color: #1a365d !important;
+    color: #fff !important;
 }
 
 .feature-grid {
@@ -179,15 +187,19 @@ header {
 }
 
 .feature-item {
-    background-color: #f9f9f9;
+    background-color: #3d3d3d !important;
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .feature-item h4 {
     margin-bottom: 0.5rem;
-    color: #1a365d !important;
+    color: #fff !important;
+}
+
+.feature-item p {
+    color: #e2e8f0 !important;
 }
 
 /* 产品详情页样式 */
@@ -201,21 +213,21 @@ header {
 .product-specs h3,
 .product-usage h3 {
     margin-bottom: 1.5rem;
-    color: #1a365d !important;
+    color: #fff !important;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid #1a365d;
 }
 
 .product-usage h4 {
     margin: 1.5rem 0 1rem;
-    color: #1a365d !important;
+    color: #fff !important;
 }
 
 .specs-list {
-    background-color: #f9f9f9;
+    background-color: #3d3d3d !important;
     padding: 1.5rem;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     list-style: none;
 }
 
@@ -224,13 +236,14 @@ header {
     padding-left: 1.5rem;
     position: relative;
     line-height: 1.8;
+    color: #e2e8f0 !important;
 }
 
 .specs-list li::before {
     content: "•";
     position: absolute;
     left: 0;
-    color: #1a365d !important;
+    color: #e2e8f0 !important;
     font-weight: bold;
 }
 
@@ -242,11 +255,13 @@ header {
 .product-usage ol li {
     margin-bottom: 1rem;
     line-height: 1.8;
+    color: #e2e8f0 !important;
 }
 
 .product-usage p {
     margin-bottom: 1.5rem;
     line-height: 1.8;
+    color: #e2e8f0 !important;
 }
 
 .product-usage table {
@@ -258,18 +273,19 @@ header {
 .product-usage table th,
 .product-usage table td {
     padding: 0.8rem;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #4d4d4d;
     text-align: left;
+    color: #e2e8f0 !important;
 }
 
 .product-usage table th {
-    background-color: #f9f9f9;
-    color: #1a365d !important;
+    background-color: #1a365d !important;
+    color: #fff !important;
     font-weight: bold;
 }
 
 .product-usage table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #3d3d3d !important;
 }
 
 /* 产品图片样式 */
@@ -282,7 +298,7 @@ header {
     max-width: 100%;
     height: auto;
     border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* 灵巧手样式 */
