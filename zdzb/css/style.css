@@ -431,32 +431,47 @@ footer p {
 
 /* 响应式设计 */
 @media (max-width: 768px) {
+    /* 调整主容器在手机端的样式 */
     .product-container {
         flex-direction: column;
         padding: 1rem;
     }
     
+    /* 调整侧边栏在手机端的样式 - 取消固定定位 */
     .sidebar {
         width: 100%;
+        position: static;
+        margin-bottom: 1rem;
     }
     
+    /* 调整顶部导航在手机端的样式 */
     .top-nav ul {
-        gap: 1rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
     
+    .top-nav ul li a {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 调整内容区域在手机端的样式 */
     .content {
         padding: 1rem;
     }
     
+    /* 调整产品标题在手机端的样式 */
     .product-hero h2 {
         font-size: 2rem;
     }
     
+    /* 调整网格布局在手机端的样式 */
     .product-grid,
     .feature-grid {
         grid-template-columns: 1fr;
     }
     
+    /* 调整表格在手机端的样式 */
     .product-usage table {
         font-size: 0.9rem;
     }
