@@ -414,7 +414,114 @@ header {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* 灵巧手样式 */
+/* 通用表格样式 */
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.spec-table th,
+.spec-table td {
+    padding: 0.8rem;
+    border: 1px solid #333;
+    text-align: left;
+    color: #e2e8f0 !important;
+}
+
+.spec-table th {
+    background-color: #2d2d2d !important;
+    color: #4caf50 !important;
+    font-weight: bold;
+}
+
+.spec-table tr:nth-child(even) {
+    background-color: #2d2d2d !important;
+}
+
+.spec-table tr:hover {
+    background-color: rgba(76, 175, 80, 0.1) !important;
+}
+
+/* 产品章节样式 */
+.product-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #4caf50 !important;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.product-section h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: #4caf50 !important;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.product-section h4 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    color: #4caf50 !important;
+}
+
+.product-section p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #e2e8f0 !important;
+}
+
+.product-section ul,
+.product-section ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-section ul li,
+.product-section ol li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+    color: #e2e8f0 !important;
+}
+
+/* 产品总览样式 */
+.product-overview h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4caf50 !important;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.product-overview h4 {
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem;
+    color: #4caf50 !important;
+}
+
+.product-overview p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #e2e8f0 !important;
+}
+
+.product-overview ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-overview ul li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+    color: #e2e8f0 !important;
+}
+
 /* 页脚样式 */
 footer {
     background-color: #1e1e1e !important;
