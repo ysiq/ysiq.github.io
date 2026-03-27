@@ -16,7 +16,6 @@ title: 智能窗帘
     <h3>产品特点</h3>
     <ul class="specs-list">
         <li><strong>智能控制</strong>：支持手机APP远程控制，定时开关</li>
-        <li><strong>语音控制</strong>：兼容主流智能音箱，支持语音指令</li>
         <li><strong>场景联动</strong>：可与其他智能设备联动，实现自动化场景</li>
         <li><strong>静音设计</strong>：运行安静，不影响生活</li>
         <li><strong>易于安装</strong>：适配多种窗帘轨道，安装简单</li>

@@ -16,7 +16,6 @@ title: 墙面开关
     <h3>产品特点</h3>
     <ul class="specs-list">
         <li><strong>智能控制</strong>：支持手机APP远程控制，定时开关</li>
-        <li><strong>语音控制</strong>：兼容主流智能音箱，支持语音指令</li>
         <li><strong>场景联动</strong>：可与其他智能设备联动，实现自动化场景</li>
         <li><strong>安全可靠</strong>：过载保护，短路保护，使用更安心</li>
         <li><strong>易于安装</strong>：标准86型开关尺寸，直接替换传统开关</li>
