@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/index.html">网站首页</a></li>
+                <li><a href="/blog/">个人博客</a></li>
+                <li><a href="/zdzb/">公司产品</a></li>
+                <li><a href="/zdzb/smart-home/">智能家居</a></li>
+            </ul>
+        </nav>
+        <h1>{{ site.name }}</h1>
+    </header>
+    <main>
+        {{ content }}
+    </main>
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.name }}. 保留所有权利.</p>
+    </footer>
+</body>
+</html>

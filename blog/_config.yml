@@ -1,0 +1,18 @@
+# 个人博客配置
+name: 个人博客
+description: 我的个人技术博客
+baseurl: "/blog"
+url: ""
+
+# 构建配置
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+# 导航菜单
+nav_menu:
+  - title: 博客首页
+    url: /
+  - title: 分类
+    url: /categories/
+  - title: 标签
+    url: /tags/
