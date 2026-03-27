@@ -23,7 +23,14 @@ header {
 
 /* 顶部导航样式 */
 .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #1e1e1e !important;
+    padding: 1rem 0;
     margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid #333;
 }
 
 .top-nav ul {
@@ -32,6 +39,8 @@ header {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
 }
 
 .top-nav ul li a {
