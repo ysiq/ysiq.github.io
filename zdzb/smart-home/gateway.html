@@ -1,129 +1,81 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智能网关 - 智能家居</title>
-    <link rel="stylesheet" href="/zdzb/css/style.css?v=20260327">
-</head>
-<body>
-    <header>
-        <nav class="top-nav">
-            <ul>
-                <li><a href="/zdzb/">首页</a></li>
-                <li><a href="/zdzb/smart-home/">智能家居</a></li>
-                <li><a href="/zdzb/dexterous-hand/">灵巧手</a></li>
-            </ul>
-        </nav>
-        <h1>智能网关</h1>
-    </header>
-    <main class="product-container">
-        <aside class="sidebar">
-            <nav class="secondary-nav">
-                <h3>智能家居分类</h3>
-                <ul>
-                    <li><a href="/zdzb/smart-home/gateway.html">智能网关</a></li>
-                    <li><a href="/zdzb/smart-home/wall-switch.html">墙面开关</a></li>
-                    <li><a href="/zdzb/smart-home/smart-curtain.html">智能窗帘</a></li>
-                    <li><a href="/zdzb/smart-home/socket.html">移动插座</a></li>
-                </ul>
-            </nav>
-        </aside>
-        <section class="content">
-            <section class="product-hero">
-                <h2>智能网关</h2>
-                <p>智能家居系统的核心控制中心</p>
-            </section>
-            <div class="product-image">
-                <img src="/zdzb/smart-home/img/网关.png" alt="智能网关">
-            </div>
-            <section class="product-usage">
-                <h3>网络架构</h3>
-                <p>智能家居系统采用LoRa无线通讯技术，通过智能网关实现集中管理和控制。网关通过有线网络连接路由器，确保信号稳定可靠，同时支持通过LoRa无线协议与多个子设备进行通讯，实现远程监控、定时控制、联动功能和场景功能等智能化操作。</p>
-                <div class="product-image">
-                    <img src="/zdzb/smart-home/img/整体架构.JPG" alt="整体架构">
-                </div>
-            </section>
-            <section class="product-features">
-                <h3>产品特点</h3>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>中央控制</h4>
-                        <p>集中管理所有智能设备</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>多协议支持</h4>
-                        <p>支持WiFi、Zigbee、蓝牙等多种协议</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>远程控制</h4>
-                        <p>通过手机APP远程控制家中设备</p>
-                    </div>
-                    <div class="feature-item">
-                        <h4>语音控制</h4>
-                        <p>支持语音助手控制</p>
-                    </div>
-                </div>
-            </section>
-            <section class="product-specs">
-                <h3>技术参数</h3>
-                <ul class="specs-list">
-                    <li>产品名称：智能家居网关</li>
-                    <li>产品型号：SZYJ-B03</li>
-                    <li>产品尺寸：73×72×25mm</li>
-                    <li>产品净重：68g</li>
-                    <li>电源输入：5V/1A</li>
-                    <li>工作环境：-5℃~50℃    0%~95%RH,无冷凝</li>
-                    <li>有线连接：10Mbps 支持DHCP</li>
-                    <li>无线连接：lora</li>
-                    <li>连接子设备数量：64个</li>
-                </ul>
-            </section>
-            <section class="product-usage">
-                <h3>网关连接网络</h3>
-                <ol>
-                    <li>将type-c的电源线接入网关，网关的led灯开始闪烁，说明网关上电成功，可以使用5V/1A的适配器，不可以使用快充。</li>
-                    <li>用网线将网关与路由器连接，此时观察led灯的状态，可以判断网关是否连接网络成功。</li>
-                    <li>通过尚住APP扫描设备外壳上的设备ID二维码添加设备，即可在APP中看到设备。</li>
-                </ol>
-                <h4>LED灯状态说明</h4>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>功能</th>
-                            <th>闪烁</th>
-                            <th>常亮</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>网关连接路由器的状态</td>
-                            <td>正在连接路由器</td>
-                            <td>已经连接上路由器</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>网关连接服务器的状态</td>
-                            <td>正在连接服务器</td>
-                            <td>已经连接上服务器</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>网关与服务器的通讯状态</td>
-                            <td>有服务器的数据下发</td>
-                            <td>(无此状态)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p>正常已连接服务器的情况下：1、2号灯常亮，3号灯偶尔闪烁。</p>
-                <p>注意：路由器需要支持并开启DHCP功能，一般家用路由器都支持并开启了DHCP，如遇到网关路由灯一直闪烁的时候，请检查此项配置。</p>
-            </section>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 智能网关. 保留所有权利.</p>
-    </footer>
-</body>
-</html>
+---
+layout: zdzb
+title: 智能网关
+---
+
+<div class="product-hero">
+    <h2>智能网关</h2>
+    <p>智能家居系统的核心控制中心</p>
+</div>
+
+<div class="product-image">
+    <img src="/zdzb/smart-home/img/网关.png" alt="智能网关">
+</div>
+
+<div class="product-features">
+    <h3>产品特点</h3>
+    <ul class="specs-list">
+        <li><strong>传输稳定</strong>：采用LoRa无线通讯技术，信号传输稳定可靠，覆盖范围广</li>
+        <li><strong>多接口支持</strong>：配备网口和LoRa通讯模块，支持多种设备连接</li>
+        <li><strong>集中控制</strong>：统一管理所有智能设备，实现智能化联动</li>
+        <li><strong>远程访问</strong>：通过手机APP随时随地控制家中设备</li>
+        <li><strong>安全可靠</strong>：采用多重加密技术，保障数据安全</li>
+    </ul>
+</div>
+
+<div class="product-usage">
+    <h3>使用说明</h3>
+    
+    <h4>网络架构</h4>
+    <p>智能家居系统采用LoRa无线通讯技术，通过智能网关实现集中管理和控制。</p>
+    <div class="product-image">
+        <img src="/zdzb/smart-home/img/整体架构.JPG" alt="整体架构">
+    </div>
+    
+    <h4>网关功能</h4>
+    <p>智能网关是智能家居系统的核心控制中心，负责连接各种智能设备并实现集中管理。通过网关，您可以：</p>
+    <ol>
+        <li>远程控制家中的智能设备</li>
+        <li>设置自动化场景</li>
+        <li>监控设备状态</li>
+        <li>接收设备报警信息</li>
+    </ol>
+    
+    <h4>技术参数</h4>
+    <table>
+        <tr>
+            <th>参数</th>
+            <th>规格</th>
+        </tr>
+        <tr>
+            <td>电源</td>
+            <td>DC 12V/1A</td>
+        </tr>
+        <tr>
+            <td>通讯方式</td>
+            <td>LoRa + 以太网</td>
+        </tr>
+        <tr>
+            <td>工作温度</td>
+            <td>-10℃ ~ 55℃</td>
+        </tr>
+        <tr>
+            <td>工作湿度</td>
+            <td>10% ~ 90% RH</td>
+        </tr>
+        <tr>
+            <td>尺寸</td>
+            <td>120mm × 80mm × 30mm</td>
+        </tr>
+    </table>
+    
+    <h4>安装步骤</h4>
+    <ol>
+        <li>将网关放置在家庭中心位置，确保信号覆盖范围最大化</li>
+        <li>连接电源适配器，将网关通电</li>
+        <li>使用网线连接网关和路由器</li>
+        <li>下载并安装智能家居APP</li>
+        <li>按照APP提示添加网关设备</li>
+        <li>开始添加和配置其他智能设备</li>
+    </ol>
+</div>

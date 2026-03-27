@@ -408,3 +408,8 @@ footer p {
         padding: 0.5rem;
     }
 }
+
+/* 移除顶部导航第二行 */
+header h1 {
+    display: none;
+}
