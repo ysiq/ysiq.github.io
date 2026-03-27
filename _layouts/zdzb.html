@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
+    <link rel="stylesheet" href="/zdzb/css/style.css?v=20260327">
+</head>
+<body>
+    <header>
+        <nav class="top-nav">
+            <ul>
+                <li><a href="/zdzb/">首页</a></li>
+                <li><a href="/zdzb/smart-home/">智能家居</a></li>
+                <li><a href="/zdzb/dexterous-hand/">灵巧手</a></li>
+            </ul>
+        </nav>
+        <h1>公司产品</h1>
+    </header>
+    <main class="product-container">
+        <aside class="sidebar">
+            <nav class="secondary-nav">
+                {% if page.url contains '/smart-home/' %}
+                <h3>智能家居分类</h3>
+                <ul>
+                    <li><a href="/zdzb/smart-home/gateway.html">智能网关</a></li>
+                    <li><a href="/zdzb/smart-home/wall-switch.html">墙面开关</a></li>
+                    <li><a href="/zdzb/smart-home/smart-curtain.html">智能窗帘</a></li>
+                </ul>
+                {% elsif page.url contains '/dexterous-hand' %}
+                <h3>灵巧手分类</h3>
+                <ul>
+                    <li><a href="/zdzb/dexterous-hand/basic.html">基础版</a></li>
+                    <li><a href="/zdzb/dexterous-hand/professional.html">专业版</a></li>
+                    <li><a href="/zdzb/dexterous-hand/enterprise.html">企业版</a></li>
+                </ul>
+                {% else %}
+                <h3>产品分类</h3>
+                <ul>
+                    <li><a href="/zdzb/smart-home/">智能家居</a></li>
+                    <li><a href="/zdzb/dexterous-hand/">灵巧手</a></li>
+                </ul>
+                {% endif %}
+            </nav>
+        </aside>
+        <section class="content">
+            {{ content }}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} 公司产品. 保留所有权利.</p>
+    </footer>
+</body>
+</html>

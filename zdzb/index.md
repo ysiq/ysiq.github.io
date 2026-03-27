@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: zdzb
 title: 公司产品
 ---
 
@@ -21,4 +21,3 @@ title: 公司产品
         </a>
     </div>
 </section>
-
