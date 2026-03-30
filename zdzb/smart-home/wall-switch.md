@@ -1,5 +1,5 @@
 ---
-layout: zdzb
+layout: default
 title: 墙面开关
 ---
 

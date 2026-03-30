@@ -1,5 +1,5 @@
 ---
-layout: zdzb
+layout: default
 title: 智能窗帘
 ---
 
