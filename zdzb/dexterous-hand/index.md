@@ -8,6 +8,14 @@ title: 灵巧手
     <p>面向科研教育、服务机器人、精密操作、人机协作场景，实现类人化精细抓取与交互</p>
 </section>
 
+<div class="product-image">
+    <img src="/zdzb/dexterous-hand/img/灵气手正面.png" alt="灵巧手正面">
+</div>
+
+<div class="product-image">
+    <img src="/zdzb/dexterous-hand/img/灵巧手背面.png" alt="灵巧手背面">
+</div>
+
 <section class="product-overview">
     <h3>产品总览</h3>
     <p>本产品是一款高自由度、力感知、轻量化一体化灵巧手，在设计上充分考虑了现代机器人技术的需求，提供了卓越的灵活性和精准度。</p>
