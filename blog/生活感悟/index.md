@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: blog
 title: 生活感悟
 ---
 
