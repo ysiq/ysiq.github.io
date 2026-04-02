@@ -1,0 +1,778 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #21262d;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent-primary: #58a6ff;
+    --accent-green: #3fb950;
+    --accent-gradient: linear-gradient(135deg, #58a6ff 0%, #a371f7 100%);
+    --green-gradient: linear-gradient(135deg, #3fb950 0%, #56d364 100%);
+    --border-color: #30363d;
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+    position: relative;
+}
+
+.background-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 15% 20%, rgba(63, 185, 80, 0.06) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(88, 166, 255, 0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.top-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.nav-brand svg {
+    color: var(--accent-green);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.nav-links li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.nav-links li a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.nav-links li a.active {
+    background: linear-gradient(90deg, #3fb950, #56d364, #3fb950);
+    background-size: 200% 100%;
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(63, 185, 80, 0.4);
+    animation: shimmer 2s ease infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.product-container {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    height: fit-content;
+}
+
+.secondary-nav {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.secondary-nav h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.secondary-nav h3 svg {
+    flex-shrink: 0;
+}
+
+.secondary-nav ul {
+    list-style: none;
+}
+
+.secondary-nav ul li {
+    margin-bottom: 0.25rem;
+}
+
+.secondary-nav ul li a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.875rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.secondary-nav ul li a.active {
+    background: linear-gradient(90deg, #3fb950, #56d364, #3fb950);
+    background-size: 200% 100%;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(63, 185, 80, 0.3);
+    animation: shimmer 2s ease infinite;
+}
+
+.secondary-nav ul li a:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+.content {
+    flex: 1;
+    min-width: 0;
+}
+
+.product-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(63, 185, 80, 0.1) 0%, rgba(88, 166, 255, 0.1) 100%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(63, 185, 80, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.product-hero h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--green-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.product-hero p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    position: relative;
+}
+
+.product-list h3,
+.smart-home-features h3,
+.smart-home-products h3,
+.smart-home-advantages h3,
+.product-features h3,
+.product-specs h3,
+.product-usage h3,
+.product-section h3,
+.product-overview h3,
+.smart-home-app h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.product-list h3::before,
+.smart-home-features h3::before,
+.smart-home-products h3::before,
+.smart-home-advantages h3::before,
+.product-features h3::before,
+.product-specs h3::before,
+.product-usage h3::before,
+.product-section h3::before,
+.product-overview h3::before,
+.smart-home-app h3::before {
+    content: '';
+    width: 4px;
+    height: 1.25rem;
+    background: var(--green-gradient);
+    border-radius: 2px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.product-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.product-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--green-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-item:hover {
+    border-color: var(--accent-green);
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow);
+}
+
+.product-item:hover::before {
+    opacity: 1;
+}
+
+.product-item h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.product-item:hover h4 {
+    color: var(--accent-green);
+}
+
+.product-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.download-list {
+    margin-top: 2rem;
+}
+
+.download-list h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.download-list h3::before {
+    content: '';
+    width: 4px;
+    height: 1.25rem;
+    background: var(--green-gradient);
+    border-radius: 2px;
+}
+
+.download-list ul {
+    list-style: none;
+}
+
+.download-list ul li {
+    margin-bottom: 0.5rem;
+}
+
+.download-list ul li a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.875rem 1rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.download-list ul li a:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.smart-home-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(63, 185, 80, 0.1) 0%, rgba(88, 166, 255, 0.1) 100%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.smart-home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(63, 185, 80, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.smart-home-hero h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--green-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.smart-home-hero p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    position: relative;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.feature-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+}
+
+.feature-item h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    margin-bottom: 0.75rem;
+}
+
+.feature-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.smart-home-app {
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.smart-home-app::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3fb950 0%, #56d364 50%, #3fb950 100%);
+}
+
+.app-download {
+    text-align: center;
+}
+
+.app-download h4 {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    margin-bottom: 1rem;
+}
+
+.app-download p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #3fb950 0%, #56d364 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 12px rgba(63, 185, 80, 0.3);
+}
+
+.download-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(63, 185, 80, 0.5);
+}
+
+.product-features,
+.product-specs,
+.product-usage {
+    margin-bottom: 3rem;
+}
+
+.product-usage h4 {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    margin: 1.5rem 0 1rem;
+}
+
+.specs-list {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    list-style: none;
+}
+
+.specs-list li {
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.specs-list li:last-child {
+    border-bottom: none;
+}
+
+.specs-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent-green);
+    border-radius: 50%;
+}
+
+.product-usage ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-usage ol li {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.product-usage p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.spec-table,
+.product-usage table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.spec-table th,
+.spec-table td,
+.product-usage table th,
+.product-usage table td {
+    padding: 1rem;
+    text-align: left;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.spec-table th,
+.product-usage table th {
+    background-color: var(--bg-tertiary);
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.spec-table tr:last-child td,
+.product-usage table tr:last-child td {
+    border-bottom: none;
+}
+
+.spec-table tr:hover,
+.product-usage table tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.product-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-section h4 {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    margin: 1.5rem 0 1rem;
+}
+
+.product-section p,
+.product-overview p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.product-section ul,
+.product-section ol,
+.product-overview ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-section ul li,
+.product-section ol li,
+.product-overview ul li {
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.product-overview h3 {
+    font-size: 1.5rem;
+}
+
+.product-overview h4 {
+    font-size: 1.1rem;
+    color: var(--accent-green);
+    margin: 2rem 0 1rem;
+}
+
+.product-image {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.product-image img:hover {
+    transform: scale(1.02);
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    position: relative;
+    z-index: 1;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--green-gradient);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(63, 185, 80, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 25px rgba(63, 185, 80, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .product-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .product-container {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-hero,
+    .smart-home-hero {
+        padding: 2rem 1rem;
+    }
+
+    .product-hero h2,
+    .smart-home-hero h2 {
+        font-size: 1.75rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spec-table,
+    .product-usage table {
+        font-size: 0.85rem;
+    }
+
+    .spec-table th,
+    .spec-table td,
+    .product-usage table th,
+    .product-usage table td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-color);
+}

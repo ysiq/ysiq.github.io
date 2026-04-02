@@ -1,0 +1,13 @@
+# 站点配置
+name: yangsong
+description: 个人网站
+url: https://ysiq.github.io
+
+# 构建配置
+markdown: kramdown
+permalink: pretty
+
+# 排除文件
+exclude:
+  - README.md
+  - .gitignore
