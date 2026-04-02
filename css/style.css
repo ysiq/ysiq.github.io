@@ -38,49 +38,6 @@ body {
     z-index: 0;
 }
 
-.header {
-    text-align: center;
-    padding: 4rem 2rem 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.avatar {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1.5rem;
-    background: var(--accent-gradient);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #fff;
-    box-shadow: 0 4px 30px rgba(88, 166, 255, 0.4);
-    animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 4px 30px rgba(88, 166, 255, 0.4); }
-    50% { box-shadow: 0 4px 40px rgba(88, 166, 255, 0.6); }
-}
-
-.site-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.5rem;
-}
-
-.site-subtitle {
-    color: var(--text-secondary);
-    font-size: 1.125rem;
-}
-
 .main {
     max-width: 900px;
     margin: 0 auto;
@@ -114,7 +71,12 @@ body {
 .hero-title {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #fff;
+    background: linear-gradient(90deg, #58a6ff, #a371f7, #f778ba, #58a6ff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 4s ease infinite;
     margin-bottom: 1rem;
     position: relative;
 }
@@ -123,6 +85,37 @@ body {
     color: var(--text-secondary);
     font-size: 1rem;
     position: relative;
+}
+
+.author-name {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background: var(--accent-primary);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink 0.8s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .links-section {
@@ -232,6 +225,100 @@ body {
     transform: translateX(8px);
 }
 
+.mini-game {
+    margin-bottom: 3rem;
+}
+
+.game-container {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 4px;
+    background: var(--bg-tertiary);
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+.puzzle-tile {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.puzzle-tile:not(.empty):hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.4);
+}
+
+.puzzle-tile.empty {
+    background: var(--bg-primary);
+    cursor: default;
+    opacity: 0.3;
+}
+
+.game-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.game-controls strong {
+    color: var(--accent-primary);
+}
+
+.game-btn {
+    padding: 0.5rem 1rem;
+    background: var(--accent-gradient);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(88, 166, 255, 0.4);
+}
+
+.win-message {
+    display: none;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, rgba(35, 134, 54, 0.2), rgba(63, 185, 80, 0.2));
+    border: 1px solid #238636;
+    border-radius: 8px;
+    color: #238636;
+    font-weight: 600;
+}
+
+.win-message.show {
+    display: block;
+}
+
 .features {
     display: flex;
     justify-content: center;
@@ -273,20 +360,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .header {
-        padding: 2rem 1rem;
-    }
-
-    .avatar {
-        width: 80px;
-        height: 80px;
-        font-size: 2rem;
-    }
-
-    .site-title {
-        font-size: 2rem;
-    }
-
     .main {
         padding: 1rem;
     }

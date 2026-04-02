@@ -9,18 +9,11 @@
 <body>
     <div class="background-pattern"></div>
     
-    <header class="header">
-        <div class="avatar">
-            <span>Y</span>
-        </div>
-        <h1 class="site-title">yangsong</h1>
-        <p class="site-subtitle">技术探索 · 产品展示</p>
-    </header>
-
     <main class="main">
         <section class="hero">
-            <h2 class="hero-title">欢迎来到我的个人网站</h2>
-            <p class="hero-desc">这里记录着我的技术分享、生活感悟以及公司产品展示</p>
+            <h2 class="hero-title" id="typewriter1"></h2>
+            <p class="hero-desc" id="typewriter2"></p>
+            <p class="author-name">杨松</p>
         </section>
 
         <section class="links-section">
@@ -54,6 +47,19 @@
             </div>
         </section>
 
+        <section class="mini-game">
+            <h3 class="section-title">8-Puzzle</h3>
+            <div class="game-container">
+                <div class="puzzle-grid" id="puzzleGrid"></div>
+                <div class="game-controls">
+                    <span>步数: <strong id="moveCount">0</strong></span>
+                    <button id="resetBtn" class="game-btn">重置</button>
+                    <button id="shuffleBtn" class="game-btn">打乱</button>
+                </div>
+                <div class="win-message" id="winMessage">🎉 恭喜通关！</div>
+            </div>
+        </section>
+
         <section class="features">
             <div class="feature-item">
                 <span class="feature-icon">💻</span>
@@ -77,5 +83,117 @@
     <footer class="footer">
         <p>&copy; 2026 yangsong. All rights reserved.</p>
     </footer>
+
+    <script>
+        const texts = [
+            { id: 'typewriter1', text: '欢迎来到我的个人网站', delay: 0, isTitle: true },
+            { id: 'typewriter2', text: '这里记录着我的技术分享、生活感悟以及公司产品展示', delay: 1500, isTitle: false }
+        ];
+
+        texts.forEach(item => {
+            const el = document.getElementById(item.id);
+            let i = 0;
+            const speed = 80;
+            
+            setTimeout(() => {
+                function type() {
+                    if (i < item.text.length) {
+                        el.textContent += item.text.charAt(i);
+                        i++;
+                        setTimeout(type, speed);
+                    } else if (item.isTitle) {
+                        el.innerHTML += '<span class="typing-cursor"></span>';
+                    }
+                }
+                type();
+            }, item.delay);
+        });
+
+        const puzzleGrid = document.getElementById('puzzleGrid');
+        const moveCountEl = document.getElementById('moveCount');
+        const resetBtn = document.getElementById('resetBtn');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const winMessage = document.getElementById('winMessage');
+
+        const animeColors = [
+            'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+            'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
+            'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+            'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+            'linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%)',
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+        ];
+
+        let state = [1,2,3,4,5,6,7,8,0];
+        let moves = 0;
+
+        function renderPuzzle() {
+            puzzleGrid.innerHTML = '';
+            state.forEach((val, idx) => {
+                const tile = document.createElement('div');
+                tile.className = 'puzzle-tile' + (val === 0 ? ' empty' : '');
+                if (val !== 0) {
+                    tile.style.background = animeColors[val - 1];
+                    tile.textContent = val;
+                }
+                tile.addEventListener('click', () => clickTile(idx));
+                puzzleGrid.appendChild(tile);
+            });
+            moveCountEl.textContent = moves;
+            checkWin();
+        }
+
+        function getEmptyIdx() {
+            return state.indexOf(0);
+        }
+
+        function getNeighbors(idx) {
+            const row = Math.floor(idx / 3), col = idx % 3;
+            const neighbors = [];
+            if (row > 0) neighbors.push(idx - 3);
+            if (row < 2) neighbors.push(idx + 3);
+            if (col > 0) neighbors.push(idx - 1);
+            if (col < 2) neighbors.push(idx + 1);
+            return neighbors;
+        }
+
+        function clickTile(idx) {
+            const emptyIdx = getEmptyIdx();
+            if (getNeighbors(emptyIdx).includes(idx)) {
+                [state[idx], state[emptyIdx]] = [state[emptyIdx], state[idx]];
+                moves++;
+                renderPuzzle();
+            }
+        }
+
+        function checkWin() {
+            const win = state.every((val, idx) => val === (idx === 8 ? 0 : idx + 1));
+            winMessage.classList.toggle('show', win);
+        }
+
+        function shuffle() {
+            for (let i = 0; i < 100; i++) {
+                const emptyIdx = getEmptyIdx();
+                const neighbors = getNeighbors(emptyIdx);
+                const rand = neighbors[Math.floor(Math.random() * neighbors.length)];
+                [state[emptyIdx], state[rand]] = [state[rand], state[emptyIdx]];
+            }
+            moves = 0;
+            renderPuzzle();
+        }
+
+        function reset() {
+            state = [1,2,3,4,5,6,7,8,0];
+            moves = 0;
+            renderPuzzle();
+        }
+
+        resetBtn.addEventListener('click', reset);
+        shuffleBtn.addEventListener('click', shuffle);
+
+        shuffle();
+    </script>
 </body>
 </html>
