@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
     <link rel="stylesheet" href="/blog/css/style.css?v=20260403">
+    <script src="/lib/three.min.js"></script>
 </head>
 <body>
     <div class="background-pattern"></div>
@@ -12,7 +13,7 @@
     <header class="header">
         <nav class="top-nav">
             <a href="/blog/" class="nav-brand">
-                <span>{{ site.name | slice: 0 }}</span>
+                <canvas id="threeCanvas" width="45" height="45"></canvas>
                 <span class="brand-text">{{ site.name }}</span>
             </a>
             <ul class="nav-links">
@@ -44,6 +45,39 @@
                     item.classList.add('active');
                 }
             });
+        })();
+
+        (function() {
+            const canvas = document.getElementById('threeCanvas');
+            if (!canvas) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+            camera.position.z = 3;
+            
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas, 
+                antialias: true, 
+                alpha: true 
+            });
+            renderer.setSize(45, 45);
+            renderer.setClearColor(0x000000, 0);
+            
+            const geometry = new THREE.IcosahedronGeometry(1, 0);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0x58a6ff, 
+                wireframe: true 
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                mesh.rotation.x += 0.008;
+                mesh.rotation.y += 0.012;
+                renderer.render(scene, camera);
+            }
+            animate();
         })();
     </script>
 </body>
