@@ -27,7 +27,10 @@
 
     <div class="article-wrapper">
         <aside class="article-toc" id="articleToc">
-            <div class="toc-title">目录</div>
+            <div class="toc-header">
+                <span class="toc-title">目录</span>
+                <button class="toc-toggle" id="tocToggle">全部</button>
+            </div>
             <nav class="toc-nav" id="tocNav"></nav>
         </aside>
         <main class="main-container">
@@ -42,17 +45,6 @@
     </footer>
 
     <script>
-        (function() {
-            const currentPath = decodeURIComponent(window.location.pathname);
-            const navItems = document.querySelectorAll('.nav-links li a');
-            navItems.forEach(item => {
-                const href = item.getAttribute('href');
-                if (currentPath === href || currentPath === href.replace(/\/$/, '') || currentPath + '/' === href) {
-                    item.classList.add('active');
-                }
-            });
-        })();
-
         (function() {
             const canvas = document.getElementById('threeCanvas');
             if (!canvas) return;
@@ -90,6 +82,7 @@
             const content = document.querySelector('.content');
             const tocNav = document.getElementById('tocNav');
             const articleToc = document.getElementById('articleToc');
+            const tocToggle = document.getElementById('tocToggle');
             
             if (!content || !tocNav) return;
             
@@ -100,8 +93,36 @@
                 return;
             }
             
+            let isAllExpanded = false;
+            
+            tocToggle.addEventListener('click', function() {
+                isAllExpanded = !isAllExpanded;
+                const groups = tocNav.querySelectorAll('.toc-group');
+                const arrows = tocNav.querySelectorAll('.toc-arrow');
+                
+                groups.forEach((group, i) => {
+                    const h2Count = tocNav.querySelectorAll('.toc-level-2').length;
+                    const groupIndex = Math.floor(i / (h2Count || 1));
+                    
+                    if (isAllExpanded) {
+                        group.style.display = 'block';
+                        arrows[i].textContent = '▼';
+                        arrows[i].classList.add('expanded');
+                    } else {
+                        group.style.display = 'none';
+                        arrows[i].textContent = '▶';
+                        arrows[i].classList.remove('expanded');
+                    }
+                });
+                
+                tocToggle.textContent = isAllExpanded ? '收起' : '全部';
+            });
+            
             const tocList = document.createElement('ul');
             tocList.className = 'toc-list';
+            
+            let currentGroup = null;
+            let h2Index = -1;
             
             headings.forEach((heading, index) => {
                 if (!heading.id) {
@@ -109,24 +130,95 @@
                 }
                 
                 const level = parseInt(heading.tagName.charAt(1));
-                const li = document.createElement('li');
-                li.className = 'toc-item toc-level-' + level;
+                const titleText = heading.textContent.replace(/^[0-9]+、/, '').replace(/^[0-9]+\./, '').trim();
                 
-                const a = document.createElement('a');
-                a.href = '#' + heading.id;
-                a.textContent = heading.textContent.replace(/[0-9]+、/g, '').trim();
-                a.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const target = document.getElementById(heading.id);
-                    if (target) {
-                        const offset = 80;
-                        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                        window.scrollTo({ top: top, behavior: 'smooth' });
+                if (level === 1) {
+                    const li = document.createElement('li');
+                    li.className = 'toc-item toc-level-1';
+                    li.innerHTML = '<a href="#' + heading.id + '">' + titleText + '</a>';
+                    tocList.appendChild(li);
+                    currentGroup = null;
+                } else if (level === 2) {
+                    h2Index++;
+                    
+                    if (!currentGroup) {
+                        currentGroup = document.createElement('li');
+                        currentGroup.className = 'toc-group-item';
+                    } else {
+                        tocList.appendChild(currentGroup);
+                        currentGroup = document.createElement('li');
+                        currentGroup.className = 'toc-group-item';
                     }
-                });
+                    
+                    const group = document.createElement('div');
+                    group.className = 'toc-group';
+                    group.style.display = 'block';
+                    
+                    const header = document.createElement('div');
+                    header.className = 'toc-group-header';
+                    
+                    const arrow = document.createElement('span');
+                    arrow.className = 'toc-arrow expanded';
+                    arrow.textContent = '▼';
+                    
+                    const a = document.createElement('a');
+                    a.href = '#' + heading.id;
+                    a.textContent = titleText;
+                    
+                    header.appendChild(arrow);
+                    header.appendChild(a);
+                    
+                    header.addEventListener('click', function(e) {
+                        if (e.target.tagName === 'A') return;
+                        e.preventDefault();
+                        const sublist = group.querySelector('.toc-sublist');
+                        if (sublist.style.display === 'none') {
+                            sublist.style.display = 'block';
+                            arrow.textContent = '▼';
+                            arrow.classList.add('expanded');
+                        } else {
+                            sublist.style.display = 'none';
+                            arrow.textContent = '▶';
+                            arrow.classList.remove('expanded');
+                        }
+                    });
+                    
+                    const sublist = document.createElement('ul');
+                    sublist.className = 'toc-sublist toc-sublist-' + h2Index;
+                    
+                    group.appendChild(header);
+                    group.appendChild(sublist);
+                    currentGroup.appendChild(group);
+                    tocList.appendChild(currentGroup);
+                    currentGroup = null;
+                    
+                } else if (level === 3) {
+                    const li = document.createElement('li');
+                    li.className = 'toc-item toc-level-3';
+                    li.innerHTML = '<a href="#' + heading.id + '">' + titleText + '</a>';
+                    
+                    const lastGroup = tocList.querySelector('.toc-group:last-child .toc-sublist:last-child');
+                    if (lastGroup) {
+                        lastGroup.appendChild(li);
+                    }
+                }
                 
-                li.appendChild(a);
-                tocList.appendChild(li);
+                const addClickHandler = (headingId, text) => {
+                    const items = tocNav.querySelectorAll('a[href="#' + headingId + '"]');
+                    items.forEach(item => {
+                        item.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const target = document.getElementById(headingId);
+                            if (target) {
+                                const offset = 100;
+                                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                                window.scrollTo({ top: top, behavior: 'smooth' });
+                            }
+                        });
+                    });
+                };
+                
+                addClickHandler(heading.id, titleText);
             });
             
             tocNav.appendChild(tocList);
@@ -137,14 +229,31 @@
                 
                 headings.forEach((heading, index) => {
                     const top = heading.getBoundingClientRect().top + window.pageYOffset;
-                    if (scrollTop >= top - 100) {
+                    if (scrollTop >= top - 150) {
                         activeIndex = index;
                     }
                 });
                 
-                const items = tocNav.querySelectorAll('.toc-item');
+                const items = tocNav.querySelectorAll('.toc-item a');
                 items.forEach((item, index) => {
-                    item.classList.toggle('active', index === activeIndex);
+                    const headingId = item.getAttribute('href').replace('#', '');
+                    if (headingId === headings[activeIndex]?.id) {
+                        item.classList.add('active');
+                        const parentLi = item.closest('li');
+                        if (parentLi) {
+                            const sublist = parentLi.querySelector('.toc-sublist');
+                            if (sublist) {
+                                sublist.style.display = 'block';
+                                const arrow = parentLi.querySelector('.toc-arrow');
+                                if (arrow) {
+                                    arrow.textContent = '▼';
+                                    arrow.classList.add('expanded');
+                                }
+                            }
+                        }
+                    } else {
+                        item.classList.remove('active');
+                    }
                 });
             }
             
