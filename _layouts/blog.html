@@ -17,10 +17,10 @@
                 <span class="brand-text">{{ site.name }}</span>
             </a>
             <ul class="nav-links">
-                <li><a href="/blog/" {% if page.url == '/blog/' or page.url == '/blog' %}class="active"{% endif %}>首页</a></li>
-                <li><a href="/blog/技术分享/" {% if page.url contains '技术分享' %}class="active"{% endif %}>技术分享</a></li>
-                <li><a href="/blog/生活感悟/" {% if page.url contains '生活感悟' %}class="active"{% endif %}>生活感悟</a></li>
-                <li><a href="/blog/项目记录/" {% if page.url contains '项目记录' %}class="active"{% endif %}>项目记录</a></li>
+                <li><a href="/blog/">首页</a></li>
+                <li><a href="/blog/技术分享/">技术分享</a></li>
+                <li><a href="/blog/生活感悟/">生活感悟</a></li>
+                <li><a href="/blog/项目记录/">项目记录</a></li>
             </ul>
         </nav>
     </header>
@@ -29,7 +29,7 @@
         <aside class="article-toc" id="articleToc">
             <div class="toc-header">
                 <span class="toc-title">目录</span>
-                <button class="toc-toggle" id="tocToggle">全部</button>
+                <button class="toc-toggle" id="tocToggle">收起</button>
             </div>
             <nav class="toc-nav" id="tocNav"></nav>
         </aside>
@@ -45,40 +45,47 @@
     </footer>
 
     <script>
-        (function() {
-            const canvas = document.getElementById('threeCanvas');
-            if (!canvas) return;
-            
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
-            camera.position.z = 3;
-            
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas: canvas, 
-                antialias: true, 
-                alpha: true 
-            });
-            renderer.setSize(45, 45);
-            renderer.setClearColor(0x000000, 0);
-            
-            const geometry = new THREE.IcosahedronGeometry(1, 0);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0x58a6ff, 
-                wireframe: true 
-            });
-            const mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                mesh.rotation.x += 0.008;
-                mesh.rotation.y += 0.012;
-                renderer.render(scene, camera);
-            }
-            animate();
-        })();
-
         document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('threeCanvas');
+            if (canvas) {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+                camera.position.z = 3;
+                
+                const renderer = new THREE.WebGLRenderer({ 
+                    canvas: canvas, 
+                    antialias: true, 
+                    alpha: true 
+                });
+                renderer.setSize(45, 45);
+                renderer.setClearColor(0x000000, 0);
+                
+                const geometry = new THREE.IcosahedronGeometry(1, 0);
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: 0x58a6ff, 
+                    wireframe: true 
+                });
+                const mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+                
+                function animate() {
+                    requestAnimationFrame(animate);
+                    mesh.rotation.x += 0.008;
+                    mesh.rotation.y += 0.012;
+                    renderer.render(scene, camera);
+                }
+                animate();
+            }
+
+            const currentPath = decodeURIComponent(window.location.pathname);
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (currentPath === href || currentPath === href + '/' || currentPath.startsWith(href + '/')) {
+                    link.classList.add('active');
+                }
+            });
+
             const content = document.querySelector('.content');
             const tocNav = document.getElementById('tocNav');
             const articleToc = document.getElementById('articleToc');
@@ -93,36 +100,35 @@
                 return;
             }
             
-            let isAllExpanded = false;
+            let isAllExpanded = true;
             
             tocToggle.addEventListener('click', function() {
                 isAllExpanded = !isAllExpanded;
-                const groups = tocNav.querySelectorAll('.toc-group');
-                const arrows = tocNav.querySelectorAll('.toc-arrow');
+                const sections = tocNav.querySelectorAll('.toc-section');
                 
-                groups.forEach((group, i) => {
-                    const h2Count = tocNav.querySelectorAll('.toc-level-2').length;
-                    const groupIndex = Math.floor(i / (h2Count || 1));
+                sections.forEach((section, i) => {
+                    const arrow = section.querySelector('.toc-arrow');
+                    const sublist = section.querySelector('.toc-sublist');
                     
                     if (isAllExpanded) {
-                        group.style.display = 'block';
-                        arrows[i].textContent = '▼';
-                        arrows[i].classList.add('expanded');
+                        if (sublist) sublist.style.display = 'block';
+                        if (arrow) arrow.textContent = '▼';
                     } else {
-                        group.style.display = 'none';
-                        arrows[i].textContent = '▶';
-                        arrows[i].classList.remove('expanded');
+                        if (sublist) sublist.style.display = 'none';
+                        if (arrow) arrow.textContent = '▶';
                     }
                 });
                 
-                tocToggle.textContent = isAllExpanded ? '收起' : '全部';
+                tocToggle.textContent = isAllExpanded ? '收起' : '展开';
             });
             
             const tocList = document.createElement('ul');
             tocList.className = 'toc-list';
             
-            let currentGroup = null;
-            let h2Index = -1;
+            let h1Sections = [];
+            let currentH1 = null;
+            let currentH2 = null;
+            let h1Index = 0;
             
             headings.forEach((heading, index) => {
                 if (!heading.id) {
@@ -133,37 +139,58 @@
                 const titleText = heading.textContent.replace(/^[0-9]+、/, '').replace(/^[0-9]+\./, '').trim();
                 
                 if (level === 1) {
-                    const li = document.createElement('li');
-                    li.className = 'toc-item toc-level-1';
-                    li.innerHTML = '<a href="#' + heading.id + '">' + titleText + '</a>';
-                    tocList.appendChild(li);
-                    currentGroup = null;
+                    h1Index++;
+                    currentH1 = {
+                        id: heading.id,
+                        title: titleText,
+                        level: 1,
+                        h2Items: []
+                    };
+                    h1Sections.push(currentH1);
+                    currentH2 = null;
                 } else if (level === 2) {
-                    h2Index++;
-                    
-                    if (!currentGroup) {
-                        currentGroup = document.createElement('li');
-                        currentGroup.className = 'toc-group-item';
-                    } else {
-                        tocList.appendChild(currentGroup);
-                        currentGroup = document.createElement('li');
-                        currentGroup.className = 'toc-group-item';
+                    if (currentH1) {
+                        currentH2 = {
+                            id: heading.id,
+                            title: titleText,
+                            level: 2,
+                            h3Items: []
+                        };
+                        currentH1.h2Items.push(currentH2);
                     }
-                    
-                    const group = document.createElement('div');
-                    group.className = 'toc-group';
-                    group.style.display = 'block';
-                    
+                } else if (level === 3) {
+                    if (currentH2) {
+                        currentH2.h3Items.push({
+                            id: heading.id,
+                            title: titleText,
+                            level: 3
+                        });
+                    } else if (currentH1) {
+                        currentH1.h2Items.push({
+                            id: heading.id,
+                            title: titleText,
+                            level: 2,
+                            h3Items: []
+                        });
+                    }
+                }
+            });
+            
+            h1Sections.forEach((section, sIndex) => {
+                const li = document.createElement('li');
+                li.className = 'toc-section';
+                
+                if (section.h2Items.length > 0) {
                     const header = document.createElement('div');
-                    header.className = 'toc-group-header';
+                    header.className = 'toc-header-item';
                     
                     const arrow = document.createElement('span');
                     arrow.className = 'toc-arrow expanded';
                     arrow.textContent = '▼';
                     
                     const a = document.createElement('a');
-                    a.href = '#' + heading.id;
-                    a.textContent = titleText;
+                    a.href = '#' + section.id;
+                    a.textContent = section.title;
                     
                     header.appendChild(arrow);
                     header.appendChild(a);
@@ -171,7 +198,7 @@
                     header.addEventListener('click', function(e) {
                         if (e.target.tagName === 'A') return;
                         e.preventDefault();
-                        const sublist = group.querySelector('.toc-sublist');
+                        const sublist = li.querySelector('.toc-sublist');
                         if (sublist.style.display === 'none') {
                             sublist.style.display = 'block';
                             arrow.textContent = '▼';
@@ -183,78 +210,108 @@
                         }
                     });
                     
+                    li.appendChild(header);
+                    
                     const sublist = document.createElement('ul');
-                    sublist.className = 'toc-sublist toc-sublist-' + h2Index;
+                    sublist.className = 'toc-sublist';
                     
-                    group.appendChild(header);
-                    group.appendChild(sublist);
-                    currentGroup.appendChild(group);
-                    tocList.appendChild(currentGroup);
-                    currentGroup = null;
+                    section.h2Items.forEach(item => {
+                        const subLi = document.createElement('li');
+                        subLi.className = 'toc-sub-item';
+                        
+                        if (item.h3Items && item.h3Items.length > 0) {
+                            const subHeader = document.createElement('div');
+                            subHeader.className = 'toc-header-item toc-sub-header';
+                            
+                            const subArrow = document.createElement('span');
+                            subArrow.className = 'toc-arrow expanded';
+                            subArrow.textContent = '▼';
+                            
+                            const subA = document.createElement('a');
+                            subA.href = '#' + item.id;
+                            subA.textContent = item.title;
+                            
+                            subHeader.appendChild(subArrow);
+                            subHeader.appendChild(subA);
+                            
+                            subHeader.addEventListener('click', function(e) {
+                                if (e.target.tagName === 'A') return;
+                                e.preventDefault();
+                                const subSublist = subLi.querySelector('.toc-subsublist');
+                                if (subSublist.style.display === 'none') {
+                                    subSublist.style.display = 'block';
+                                    subArrow.textContent = '▼';
+                                    subArrow.classList.add('expanded');
+                                } else {
+                                    subSublist.style.display = 'none';
+                                    subArrow.textContent = '▶';
+                                    subArrow.classList.remove('expanded');
+                                }
+                            });
+                            
+                            subLi.appendChild(subHeader);
+                            
+                            const subSublist = document.createElement('ul');
+                            subSublist.className = 'toc-subsublist';
+                            
+                            item.h3Items.forEach(h3Item => {
+                                const h3Li = document.createElement('li');
+                                h3Li.innerHTML = '<a href="#' + h3Item.id + '">' + h3Item.title + '</a>';
+                                subSublist.appendChild(h3Li);
+                            });
+                            
+                            subLi.appendChild(subSublist);
+                        } else {
+                            subLi.innerHTML = '<a href="#' + item.id + '">' + item.title + '</a>';
+                        }
+                        
+                        sublist.appendChild(subLi);
+                    });
                     
-                } else if (level === 3) {
-                    const li = document.createElement('li');
-                    li.className = 'toc-item toc-level-3';
-                    li.innerHTML = '<a href="#' + heading.id + '">' + titleText + '</a>';
-                    
-                    const lastGroup = tocList.querySelector('.toc-group:last-child .toc-sublist:last-child');
-                    if (lastGroup) {
-                        lastGroup.appendChild(li);
-                    }
+                    li.appendChild(sublist);
+                } else {
+                    li.innerHTML = '<a href="#' + section.id + '">' + section.title + '</a>';
                 }
                 
-                const addClickHandler = (headingId, text) => {
-                    const items = tocNav.querySelectorAll('a[href="#' + headingId + '"]');
-                    items.forEach(item => {
-                        item.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const target = document.getElementById(headingId);
-                            if (target) {
-                                const offset = 100;
-                                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                                window.scrollTo({ top: top, behavior: 'smooth' });
-                            }
-                        });
-                    });
-                };
-                
-                addClickHandler(heading.id, titleText);
+                tocList.appendChild(li);
             });
             
             tocNav.appendChild(tocList);
             
+            tocNav.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').replace('#', '');
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        const offset = 100;
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+            });
+            
             function updateActiveHeading() {
                 const scrollTop = window.pageYOffset;
-                let activeIndex = 0;
+                let activeHeading = null;
                 
-                headings.forEach((heading, index) => {
+                headings.forEach(heading => {
                     const top = heading.getBoundingClientRect().top + window.pageYOffset;
                     if (scrollTop >= top - 150) {
-                        activeIndex = index;
+                        activeHeading = heading;
                     }
                 });
                 
-                const items = tocNav.querySelectorAll('.toc-item a');
-                items.forEach((item, index) => {
-                    const headingId = item.getAttribute('href').replace('#', '');
-                    if (headingId === headings[activeIndex]?.id) {
-                        item.classList.add('active');
-                        const parentLi = item.closest('li');
-                        if (parentLi) {
-                            const sublist = parentLi.querySelector('.toc-sublist');
-                            if (sublist) {
-                                sublist.style.display = 'block';
-                                const arrow = parentLi.querySelector('.toc-arrow');
-                                if (arrow) {
-                                    arrow.textContent = '▼';
-                                    arrow.classList.add('expanded');
-                                }
-                            }
-                        }
-                    } else {
-                        item.classList.remove('active');
-                    }
+                tocNav.querySelectorAll('a').forEach(a => {
+                    a.classList.remove('active');
                 });
+                
+                if (activeHeading) {
+                    const activeLink = tocNav.querySelector('a[href="#' + activeHeading.id + '"]');
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
             }
             
             window.addEventListener('scroll', updateActiveHeading, { passive: true });
