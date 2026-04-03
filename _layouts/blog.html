@@ -25,9 +25,15 @@
         </nav>
     </header>
 
-    <div class="main-container">
-        <main class="content">
-            {{ content }}
+    <div class="article-wrapper">
+        <aside class="article-toc" id="articleToc">
+            <div class="toc-title">目录</div>
+            <nav class="toc-nav" id="tocNav"></nav>
+        </aside>
+        <main class="main-container">
+            <article class="content">
+                {{ content }}
+            </article>
         </main>
     </div>
 
@@ -79,6 +85,72 @@
             }
             animate();
         })();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.content');
+            const tocNav = document.getElementById('tocNav');
+            const articleToc = document.getElementById('articleToc');
+            
+            if (!content || !tocNav) return;
+            
+            const headings = content.querySelectorAll('h1, h2, h3');
+            
+            if (headings.length === 0) {
+                articleToc.style.display = 'none';
+                return;
+            }
+            
+            const tocList = document.createElement('ul');
+            tocList.className = 'toc-list';
+            
+            headings.forEach((heading, index) => {
+                if (!heading.id) {
+                    heading.id = 'heading-' + index;
+                }
+                
+                const level = parseInt(heading.tagName.charAt(1));
+                const li = document.createElement('li');
+                li.className = 'toc-item toc-level-' + level;
+                
+                const a = document.createElement('a');
+                a.href = '#' + heading.id;
+                a.textContent = heading.textContent.replace(/[0-9]+、/g, '').trim();
+                a.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.getElementById(heading.id);
+                    if (target) {
+                        const offset = 80;
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+                
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+            
+            tocNav.appendChild(tocList);
+            
+            function updateActiveHeading() {
+                const scrollTop = window.pageYOffset;
+                let activeIndex = 0;
+                
+                headings.forEach((heading, index) => {
+                    const top = heading.getBoundingClientRect().top + window.pageYOffset;
+                    if (scrollTop >= top - 100) {
+                        activeIndex = index;
+                    }
+                });
+                
+                const items = tocNav.querySelectorAll('.toc-item');
+                items.forEach((item, index) => {
+                    item.classList.toggle('active', index === activeIndex);
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveHeading, { passive: true });
+            updateActiveHeading();
+        });
     </script>
 </body>
 </html>
