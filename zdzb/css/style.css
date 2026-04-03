@@ -68,7 +68,8 @@ body {
     font-size: 1.125rem;
 }
 
-.nav-brand svg {
+.nav-brand svg,
+.nav-brand canvas {
     color: var(--accent-green);
 }
 
