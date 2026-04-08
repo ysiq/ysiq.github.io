@@ -300,7 +300,7 @@ npx electron-packager . myapp --platform=win32
 
 ## 8、Electron 优点/缺点
 
-优点
+### 优点
 
 - 开发效率极高
 - 跨平台
@@ -309,8 +309,27 @@ npx electron-packager . myapp --platform=win32
 - 生态极其强大
 - 适合快速开发商业工具
 
-缺点
+### 缺点
 
 - 应用体积较大（至少 50MB+）
 - 内存占用高于原生软件
 - 极高性能场景不如 C++
+
+---
+
+## 实践案例：贪吃蛇游戏
+
+使用 Electron 开发的贪吃蛇游戏，打包成桌面应用程序：
+
+![贪吃蛇游戏截图](/blog/img/前端知识-1.png)
+
+**游戏特性：**
+- 纯 JavaScript + Canvas 实现
+- Electron 桌面应用
+- 键盘方向键控制
+- 分数系统
+- 流畅的动画效果
+
+**打包成果：**
+- 生成 Windows 可执行文件（.exe）
+- 可独立运行，无需开发环境

@@ -18,7 +18,7 @@ title: 技术分享
                 <span class="post-category 技术">技术分享</span>
             </div>
             <p>HTML、CSS、JavaScript基础概念，以及Node.js和Electron的详细介绍...</p>
-            <a href="/blog/技术分享/前端知识" class="read-more">阅读更多 →</a>
+            <a href="/blog/技术分享/前端技术与Node.js" class="read-more">阅读更多 →</a>
         </article>
     </div>
 </section>
