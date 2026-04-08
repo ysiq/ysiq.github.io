@@ -122,6 +122,61 @@ Node.js      = 运行在服务器端的 JavaScript 运行环境
 
   ：编译后 = 普通 JavaScript。
 
+## Three.js
+
+**定义**：**JavaScript 3D 图形库**，用于在浏览器中创建和展示 3D 图形。
+
+**定位**：**Web 3D 图形渲染引擎**，让网页拥有 3D 可视化能力。
+
+**核心功能**：
+
+- 场景（Scene）、相机（Camera）、渲染器（Renderer）三大基础组件
+- 支持多种几何体：立方体、球体、平面、自定义模型等
+- 材质与纹理：颜色、贴图、光照、阴影效果
+- 动画系统：帧循环、过渡动画、骨骼动画
+- 交互支持：鼠标事件、键盘控制、碰撞检测
+- 后处理效果：泛光、景深、运动模糊等
+
+**语法特征**：
+
+```javascript
+// 创建场景
+const scene = new THREE.Scene();
+
+// 创建相机
+const camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 1000);
+
+// 创建渲染器
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(width, height);
+document.body.appendChild(renderer.domElement);
+
+// 创建几何体
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+
+// 动画循环
+function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+animate();
+```
+
+**典型应用场景**：
+
+![Three.js 3D图形示例](/blog/img/2.png)
+
+- 数据可视化：大数据图表、地理信息展示
+- 游戏开发：网页3D游戏、虚拟现实
+- 产品展示：3D产品浏览、在线展厅
+- 数字孪生：工业仿真、建筑可视化
+- 教育培训：化学分子结构、物理模拟
+
 ## Node.js
 
 **定义**：**基于 V8 引擎的 JavaScript 运行时环境（Runtime）**。
