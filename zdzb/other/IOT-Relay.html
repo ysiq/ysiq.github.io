@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiFi 16路继电器控制板 产品说明书</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/marked.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    background: #0e0e10;
+    color: #e0e0e0;
+    display: flex;
+    min-height: 100vh;
+    line-height: 1.8;
+  }
+
+  /* ---- 侧边导航 ---- */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 280px;
+    height: 100vh;
+    background: #16161a;
+    border-right: 1px solid #2a2a30;
+    overflow-y: auto;
+    padding: 24px 0;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+  .nav-header {
+    padding: 0 20px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    border-bottom: 1px solid #2a2a30;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .nav-header small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: #888;
+    margin-top: 4px;
+    letter-spacing: 0;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 7px 20px 7px 24px;
+    color: #999;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    word-break: break-word;
+  }
+  .nav-item:hover {
+    color: #ccc;
+    background: #1e1e24;
+  }
+  .nav-item.active {
+    color: #fff;
+    border-left-color: #6c8cff;
+    background: #1c1c22;
+    font-weight: 500;
+  }
+  .nav-item.h2 { padding-left: 40px; font-size: 12.5px; }
+  .nav-item.h3 { padding-left: 56px; font-size: 12px; }
+
+  /* ---- 右侧正文 ---- */
+  #content {
+    margin-left: 280px;
+    flex: 1;
+    max-width: 860px;
+    padding: 48px 56px 80px;
+  }
+
+  /* ---- Markdown 渲染样式 ---- */
+  #content h1,
+  #content h2,
+  #content h3,
+  #content h4 {
+    color: #fff;
+    font-weight: 600;
+    margin-top: 1.6em;
+    margin-bottom: 0.5em;
+    letter-spacing: 0.3px;
+  }
+  #content h1 {
+    font-size: 26px;
+    border-bottom: 1px solid #2a2a30;
+    padding-bottom: 12px;
+    margin-top: 0;
+  }
+  #content h2 {
+    font-size: 20px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 8px;
+  }
+  #content h3 { font-size: 17px; }
+  #content h4 { font-size: 15px; }
+
+  #content p { margin: 0.7em 0; }
+  #content ul, #content ol { padding-left: 24px; margin: 0.6em 0; }
+  #content li { margin: 0.3em 0; }
+
+  #content strong { color: #fff; font-weight: 600; }
+  #content a { color: #6c8cff; text-decoration: none; }
+  #content a:hover { text-decoration: underline; }
+
+  #content hr {
+    border: none;
+    border-top: 1px solid #2a2a30;
+    margin: 2em 0;
+  }
+
+  /* 表格 */
+  #content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 14px;
+  }
+  #content th, #content td {
+    border: 1px solid #2a2a30;
+    padding: 8px 14px;
+    text-align: left;
+  }
+  #content th {
+    background: #1c1c22;
+    color: #fff;
+    font-weight: 600;
+  }
+  #content td { background: #141416; }
+
+  /* 代码块 */
+  #content code {
+    font-family: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+    font-size: 13px;
+    background: #1c1c22;
+    padding: 2px 7px;
+    border-radius: 3px;
+    color: #c9d1d9;
+  }
+  #content pre {
+    background: #121218;
+    border: 1px solid #2a2a30;
+    border-radius: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+  #content pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  /* blockquote */
+  #content blockquote {
+    border-left: 3px solid #6c8cff;
+    background: #16161e;
+    padding: 10px 18px;
+    margin: 1em 0;
+    border-radius: 0 4px 4px 0;
+    color: #b0b0c0;
+  }
+
+  /* 移动端适配 */
+  #menu-toggle {
+    display: none;
+    position: fixed;
+    top: 12px; left: 12px;
+    z-index: 200;
+    background: #1c1c22;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 22px;
+    width: 40px; height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+  #sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+
+  @media (max-width: 768px) {
+    #sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+    }
+    #sidebar.open { transform: translateX(0); }
+    #content {
+      margin-left: 0;
+      padding: 32px 20px 60px;
+    }
+    #menu-toggle { display: flex; }
+    #sidebar-overlay.open { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<button id="menu-toggle" aria-label="切换菜单">☰</button>
+<div id="sidebar-overlay"></div>
+
+<nav id="sidebar">
+  <div class="nav-header">
+    产品说明书
+    <small>WiFi 16路继电器控制板</small>
+  </div>
+  <div id="toc"></div>
+</nav>
+
+<main id="content"></main>
+
+<script>
+const markdownContent = `# WiFi 16路继电器控制板 产品说明书
+
+---
+
+## 一、产品简介
+
+本产品是一款可通过 **手机/电脑随时随地进行远程开关控制** 的继电器控制板。无论您身在何处，只要设备连接了互联网，就可以通过远程平台控制 16 路设备的开关。
+
+适用于：远程开关灯、水泵控制、电机启停、门禁控制、设备远程管理等场景。
+
+---
+
+## 二、包装内容
+
+- WiFi 继电器控制板 × 1
+- TYPE-C 数据线 × 1
+
+---
+
+## 三、快速开始
+
+### 3.1 接线与上电
+
+1. 使用 TYPE-C 数据线连接控制板供电（5V/2A 电源适配器）
+2. 上电后，板载指示灯显示 **红色呼吸灯**，表示设备启动中
+3. 将需要控制的设备接入继电器输出端子（详见接线说明）
+
+### 3.2 首次配置网络
+
+首次使用需要配置 WiFi 网络：
+
+1. 用 TYPE-C 数据线将控制板连接至电脑
+2. 打开随附的上位机配置软件
+3. 选择对应的串口号，点击"打开"
+4. 在"WiFi 配置"区域输入 WiFi 名称和密码，点击"设置 WiFi"
+5. 设备将自动连接 WiFi，连接成功后指示灯变为**黄色呼吸灯**
+
+### 3.3 连接远程服务器
+
+- WiFi 连接成功后，设备会自动连接远程 MQTT 服务器
+- 连接成功后指示灯变为**绿色呼吸灯**，表示设备就绪
+
+### 3.4 接线说明
+
+继电器输出端子为无源干接点，COM（公共端）和 NO（常开端）组成一组开关。控制设备时，将设备电源线串联接入即可。
+
+> **注意**：接线前请确保设备断电操作。大功率设备请确认继电器额定负载，避免过载。
+
+---
+
+## 四、工作模式说明
+
+每路继电器可独立设置以下两种工作模式：
+
+### 4.1 自锁模式（保持）
+
+**适用场景**：开关灯、控制电器等需要保持通断的场景。
+
+继电器根据指令开启或关闭后，会保持该状态不变，直到收到新的指令。例如：开启 → 灯一直亮，关闭 → 灯熄灭。
+
+### 4.2 自复位模式（脉冲）
+
+**适用场景**：门禁开门、门铃、启动按钮等瞬时触发的场景。
+
+收到开启指令后，继电器吸合约 **200 毫秒** 后自动断开，相当于"点动"效果。每收到一次开启指令，状态翻转一次。
+
+---
+
+## 五、操作方式
+
+### 5.1 本地按键控制
+
+控制板上有 16 个按键接口（需外接按键），对应 16 路继电器：
+
+- **按下按键 1**：切换总开关。关闭总开关时，所有通道自动关闭
+- **按下按键 2-16**：切换对应通道的开关（需总开关已开启）
+
+### 5.2 远程控制
+
+通过 MQTT 远程平台，可以对任意通道进行开关控制。控制指令下发后，设备即时响应并反馈状态。
+
+---
+
+## 六、指示灯说明
+
+### 6.1 系统状态灯（WS2812 RGB 灯）
+
+| 指示灯状态 | 设备状态 |
+|-----------|---------|
+| 🔴 红色呼吸灯 | 启动中 / 网络未连接 |
+| 🟡 黄色呼吸灯 | WiFi 已连接，等待服务器 |
+| 🟢 绿色呼吸灯 | 已就绪，可正常使用 |
+| ⚪ 白色快闪 | 正在接收指令或上报状态 |
+
+### 6.2 通道状态灯
+
+每路继电器都对应其本地按键的指示灯：
+- **灯亮**：该通道已开启
+- **灯灭**：该通道已关闭
+
+---
+
+## 七、配置工具使用说明
+
+### 7.1 软件安装
+
+\`\`\`bash
+pip install -r requirements.txt
+python main.py
+\`\`\`
+
+### 7.2 功能介绍
+
+| 功能区域 | 说明 |
+|---------|------|
+| **串口连接** | 选择设备对应的串口，点击"打开"连上设备 |
+| **设备信息** | 查看或修改设备编号和通道总数 |
+| **WiFi 配置** | 设置要连接的 WiFi 名称和密码 |
+| **输出模式** | 对每路继电器单独设置 自锁/自复位 模式 |
+
+### 7.3 设置步骤
+
+**1. 连接设备**
+- 选择串口号 → 点击"打开" → 状态显示"已连接"
+
+**2. 配置设备编号（可选）**
+- 输入设备 ID（如设备序列号）→ 点击"设置"
+- 设备 ID 用于远程平台识别设备
+
+**3. 配置 WiFi**
+- 输入 WiFi 名称和密码 → 点击"设置 WiFi"
+- 设备会自动重启网络连接
+
+**4. 设置输出模式**
+- 勾选 = 自锁模式，不勾选 = 自复位模式
+- 点击"查询"查看当前模式，修改后点击"设置"保存
+
+---
+
+## 八、产品规格
+
+| 项目 | 规格 |
+|------|------|
+| 供电方式 | TYPE-C 5V / 2A |
+| 控制路数 | 16 路 |
+| 每路模式 | 可独立设置自锁或自复位 |
+| 无线连接 | WiFi 2.4GHz |
+| 远程协议 | MQTTS（加密传输）|
+| 配置方式 | 电脑上位机软件（串口）|
+| 工作指示 | 系统状态灯 + 每路状态灯 |
+
+---
+
+## 九、使用注意事项
+
+1. **供电要求**：请使用 5V/2A 电源适配器，供电不足可能导致继电器工作异常
+2. **首次使用**：必须先通过电脑配置 WiFi 后才能进行远程控制
+3. **总开关**：第 1 路为总开关，关闭时所有通道均无法开启
+4. **网络要求**：设备需要稳定的 WiFi 环境，断网时将无法远程控制
+5. **安全提醒**：接线和维护前请断开电源；控制大功率设备时请确认继电器额定负载
+6. **故障排查**：
+   - 指示灯不亮 → 检查供电连接
+   - 一直红色呼吸 → WiFi 未连接，检查网络配置
+   - 一直黄色呼吸 → 已联网但未连上服务器，联系管理员
+
+---
+
+## 十、版本信息
+
+| 版本 | 日期 | 更新内容 |
+|------|------|---------|
+| v1.0.0 | 2025-04-27 | 初始版本发布 |
+| v1.0.1 | — | 优化控制逻辑和按键响应 |
+
+---
+
+*如有问题请联系 593790982@qq.com*`;
+
+/* ===== 渲染 Markdown ===== */
+const content = document.getElementById('content');
+content.innerHTML = marked.parse(markdownContent, { breaks: true });
+
+// 给 h1/h2/h3 加 id，便于锚点
+const headings = content.querySelectorAll('h1, h2, h3');
+const tocItems = [];
+headings.forEach(h => {
+  const text = h.textContent;
+  const id = text.replace(/\s+/g, '-').replace(/[^\w一-鿿-]/g, '');
+  h.id = id;
+  // 跳过最顶部的大标题
+  if (h.tagName === 'H1' && text.includes('产品说明书')) return;
+  tocItems.push({ tag: h.tagName, text, id });
+});
+
+/* ===== 生成侧边导航 ===== */
+const toc = document.getElementById('toc');
+tocItems.forEach(item => {
+  const a = document.createElement('a');
+  a.className = `nav-item ${item.tag.toLowerCase()}`;
+  a.textContent = item.text;
+  a.href = `#${item.id}`;
+  a.dataset.target = item.id;
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById(item.id).scrollIntoView({ behavior: 'smooth' });
+    // 移动端自动收起
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('open');
+  });
+  toc.appendChild(a);
+});
+
+/* ===== 滚动高亮导航 ===== */
+const navLinks = document.querySelectorAll('.nav-item');
+function updateActive() {
+  let current = '';
+  for (const h of headings) {
+    if (h.getBoundingClientRect().top <= 120) {
+      current = h.id;
+    }
+  }
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.dataset.target === current);
+  });
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+
+/* ===== 移动端菜单切换 ===== */
+const menuBtn = document.getElementById('menu-toggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebar-overlay');
+
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('open');
+});
+</script>
+</body>
+</html>
