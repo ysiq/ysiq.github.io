@@ -255,7 +255,27 @@
 <ol>
 <li>使用 TYPE-C 数据线连接控制板供电（5V/2A 电源适配器）</li>
 <li>上电后，板载指示灯显示 <strong>红色呼吸灯</strong>，表示设备启动中</li>
-<li>将需要控制的设备接入继电器输出端子（详见接线说明）</li>
+<li><strong>继电器接线</strong>：输出端子为无源干接点，COM（公共端）和 NO（常开端）组成一组开关。将设备电源线串联接入即可控制设备电源。
+<blockquote><strong>注意</strong>：接线前请确保设备断电操作。大功率设备请确认继电器额定负载，避免过载。</blockquote>
+</li>
+<li><strong>接线示意图</strong>：
+  <div style="margin: 1em 0; text-align: center;">
+    <img src="IOT-Relay01.png" alt="IOT-Relay接线图" style="max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #2a2a30;">
+  </div>
+</li>
+<li><strong>本地按键接线</strong>：
+  <table>
+    <thead>
+      <tr><th>接线</th><th>接线端子</th><th>线材颜色</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>按键正极</td><td>电源端子右侧两个GND</td><td>⚫</td></tr>
+      <tr><td>按键负极</td><td>从右到左偶数端子分别代表第1-16路</td><td>⚪</td></tr>
+      <tr><td>灯正极</td><td>电源端子左侧两个5V</td><td>🔴</td></tr>
+      <tr><td>灯负极</td><td>从右到左奇数端子分别代表第1-16路</td><td>🟢</td></tr>
+    </tbody>
+  </table>
+</li>
 </ol>
 <h3>3.2 首次配置网络</h3>
 <p>首次使用需要配置 WiFi 网络：</p>
@@ -271,9 +291,6 @@
 <li>WiFi 连接成功后，设备会自动连接远程 MQTT 服务器</li>
 <li>连接成功后指示灯变为<strong>绿色呼吸灯</strong>，表示设备就绪</li>
 </ul>
-<h3>3.4 接线说明</h3>
-<p>继电器输出端子为无源干接点，COM（公共端）和 NO（常开端）组成一组开关。控制设备时，将设备电源线串联接入即可。</p>
-<blockquote><strong>注意</strong>：接线前请确保设备断电操作。大功率设备请确认继电器额定负载，避免过载。</blockquote>
 <hr>
 <h2>四、工作模式说明</h2>
 <p>每路继电器可独立设置以下两种工作模式：</p>
@@ -315,9 +332,8 @@
 </ul>
 <hr>
 <h2>七、配置工具使用说明</h2>
-<h3>7.1 软件安装</h3>
-<pre><code>pip install -r requirements.txt
-python main.py</code></pre>
+<h3>7.1 配置工具下载</h3>
+<p>下载配置工具：<a href="IOT-Relay.exe">IOT-Relay.exe</a></p>
 <h3>7.2 功能介绍</h3>
 <table>
 <thead>
