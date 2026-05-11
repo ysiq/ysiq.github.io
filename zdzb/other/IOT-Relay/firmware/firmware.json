@@ -1,11 +1,11 @@
 {
     "device_model": "nb-xf-2026",
     "firmware": {
-        "version": "1.0.0",
+        "version": "1.0.1",
         "release_date": "2026-05-11",
-        "size": 1003600,
-        "sha256": "04873BE6ED80CE95B0F1F87DDF98B2C55EE0AB027A5C18688CF07FA65A657D16",
+        "size": 1049968,
+        "sha256": "2113595D31F37F1D042DF578B138F395013DFB5AE382B2C9C86613F3AFB70AF1",
         "url": "relay_control_board.bin",
-        "description": "24路继电器控制板 v1.0.0 - 支持本地按键控制、WiFi连接、MQTTS远程控制、远程重启"
+        "description": "24CH Relay Control Board v1.0.1 - WiFi/MQTTS/OTA"
     }
 }
