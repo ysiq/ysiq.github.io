@@ -6,6 +6,7 @@
         "size": 1049968,
         "sha256": "2113595D31F37F1D042DF578B138F395013DFB5AE382B2C9C86613F3AFB70AF1",
         "url": "relay_control_board.bin",
-        "description": "24CH Relay Control Board v1.0.1 - WiFi/MQTTS/OTA"
+        "description": "24CH Relay Control Board v1.0.1 - WiFi/MQTTS/OTA",
+        "changelog": "优化控制逻辑，提升按键响应速度；改进网络重连机制，增强稳定性"
     }
 }
