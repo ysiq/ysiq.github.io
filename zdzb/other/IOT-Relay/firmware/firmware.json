@@ -1,10 +1,10 @@
 {
     "device_model": "nb-xf-2026",
     "firmware": {
-        "version": "1.0.4",
+        "version": "1.0.5",
         "release_date": "2026-05-12",
         "size": 1118208,
-        "sha256": "c4da44efdbe71c2e2b6583d9e5b812445edea31c273ac80c0d97cb8b35d3fdba",
+        "sha256": "148164862042d6d77b7d7c46f69150eb3fab88ebec3a849c4d3c78139976e9d2",
         "url": "relay_control_board.bin",
         "description": "24CH Relay Control Board v1.0.3 - WiFi/MQTTS/OTA"
     }
