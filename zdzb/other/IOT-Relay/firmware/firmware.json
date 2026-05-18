@@ -4,8 +4,8 @@
         "version": "1.0.7",
         "release_date": "2026-05-18",
         "size": 1118208,
-        "sha256": "76A6CA3A24502FA264045A585CBB6D41E4EDC3726EB430CD79343B09F9EF60BA",
+        "sha256": "6A5B2378DA85BF3FCB472A53F27A89B9D7AA58085678ADCEF1CA3448509E97BB",
         "url": "relay_control_board.bin",
-        "description": "24CH Relay Control Board v1.0.7 - Fix BUTTON_ADDR_KEY3 0x26->0x23 for ch17-24 keys"
+        "description": "24CH Relay Control Board v1.0.7 - Fix ADDR_5 button bit order (P1.0=ch17)"
     }
 }
