@@ -1,11 +1,11 @@
 {
     "device_model": "nb-xf-2026",
     "firmware": {
-        "version": "1.0.6",
+        "version": "1.0.7",
         "release_date": "2026-05-18",
         "size": 1118208,
-        "sha256": "386A4EBE99495EB12BB20446865D352078C0FADD35AFCFB1CC591C1F2ABADCF4",
+        "sha256": "76A6CA3A24502FA264045A585CBB6D41E4EDC3726EB430CD79343B09F9EF60BA",
         "url": "relay_control_board.bin",
-        "description": "24CH Relay Control Board v1.0.6 - Fix ch17-24 false trigger on channel count change"
+        "description": "24CH Relay Control Board v1.0.7 - Fix BUTTON_ADDR_KEY3 0x26->0x23 for ch17-24 keys"
     }
 }
