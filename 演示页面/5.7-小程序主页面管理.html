@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.7 小程序主页面管理 - 首页</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; flex-direction: column; gap: 30px; }
+.phone { width: 375px; background: #f5f7fa; border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; border: 8px solid #1a1a2e; }
+.statusbar { background: linear-gradient(135deg, #4a90d9, #357abd); padding: 12px 20px 6px; display: flex; justify-content: space-between; color: #fff; font-size: 12px; font-weight: 600; }
+.banner { background: linear-gradient(135deg, #4a90d9, #357abd); padding: 0 20px 24px; color: #fff; }
+.banner .greeting { font-size: 22px; font-weight: 700; }
+.banner .sub { font-size: 13px; opacity: 0.85; margin: 4px 0 16px; }
+.banner .quick-status { display: flex; gap: 16px; }
+.banner .quick-status .qs { flex: 1; background: rgba(255,255,255,0.15); border-radius: 12px; padding: 12px; text-align: center; }
+.banner .quick-status .qs .v { font-size: 20px; font-weight: 700; }
+.banner .quick-status .qs .l { font-size: 11px; opacity: 0.8; }
+.body { padding: 16px; }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+.grid .item { background: #fff; border-radius: 14px; padding: 14px 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.grid .item .icon { font-size: 26px; margin-bottom: 4px; }
+.grid .item .label { font-size: 11px; color: #555; }
+.banner-card { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 16px; padding: 16px; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.banner-card .icon-big { font-size: 32px; }
+.banner-card .bc-content { flex: 1; }
+.banner-card .bc-content h4 { font-size: 14px; }
+.banner-card .bc-content p { font-size: 12px; opacity: 0.85; }
+.banner-card .bc-btn { padding: 6px 16px; background: rgba(255,255,255,0.25); border-radius: 20px; font-size: 12px; }
+.section-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 12px; display: flex; justify-content: space-between; }
+.section-title .more { font-size: 12px; color: #999; font-weight: 400; }
+.msg-item { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+.msg-item .dot { width: 8px; height: 8px; background: #e74c3c; border-radius: 50%; flex-shrink: 0; }
+.msg-item .content { flex: 1; }
+.msg-item .content .t { font-size: 13px; color: #333; }
+.msg-item .content .s { font-size: 11px; color: #999; }
+.msg-item .time { font-size: 11px; color: #bbb; }
+.wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+.code-section { background: #1e1e2e; border-radius: 12px; padding: 20px; width: 700px; }
+.code-section h3 { color: #aaa; font-size: 13px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+.code-section pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-section .kw { color: #cba6f7; } .code-section .str { color: #a6e3a1; } .code-section .cm { color: #6c7086; } .code-section .num { color: #fab387; } .code-section .tag { color: #f38ba8; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="phone">
+    <div class="statusbar">9:41 <span>🔋 100%</span></div>
+    <div class="banner">
+      <div class="greeting">👋 上午好，张爷爷</div>
+      <div class="sub">今日身体状况良好，继续保持！</div>
+      <div class="quick-status">
+        <div class="qs"><div class="v">76</div><div class="l">心率 bpm</div></div>
+        <div class="qs"><div class="v">126/82</div><div class="l">血压 mmHg</div></div>
+        <div class="qs"><div class="v">36.5℃</div><div class="l">体温</div></div>
+      </div>
+    </div>
+    <div class="body">
+      <div class="grid">
+        <div class="item" style="background:#fef3e2"><div class="icon">💊</div><div class="label">用药提醒</div></div>
+        <div class="item" style="background:#e8f5e9"><div class="icon">📝</div><div class="label">健康录入</div></div>
+        <div class="item" style="background:#fce4ec"><div class="icon">🆘</div><div class="label">一键求助</div></div>
+        <div class="item" style="background:#e3f2fd"><div class="icon">📊</div><div class="label">健康数据</div></div>
+        <div class="item" style="background:#f3e5f5"><div class="icon">📍</div><div class="label">实时位置</div></div>
+        <div class="item" style="background:#e0f7fa"><div class="icon">👨‍👩‍👧</div><div class="label">家属绑定</div></div>
+        <div class="item" style="background:#fff8e1"><div class="icon">📰</div><div class="label">健康资讯</div></div>
+        <div class="item" style="background:#fbe9e7"><div class="icon">⚙️</div><div class="label">个人设置</div></div>
+      </div>
+      <div class="banner-card">
+        <div class="icon-big">❤️</div>
+        <div class="bc-content">
+          <h4>健康周报已生成</h4>
+          <p>本周心率平稳，血压略有波动，点击查看详情</p>
+        </div>
+        <div class="bc-btn">查看 →</div>
+      </div>
+      <div class="section-title">📩 消息通知 <span class="more">查看全部 →</span></div>
+      <div class="msg-item">
+        <span class="dot"></span>
+        <div class="content"><div class="t">💊 用药提醒：请服用降压药</div><div class="s">今日 08:00 定时提醒</div></div>
+        <span class="time">08:00</span>
+      </div>
+      <div class="msg-item">
+        <span class="dot"></span>
+        <div class="content"><div class="t">📊 本周健康报告已更新</div><div class="s">查看您近7天的健康趋势</div></div>
+        <span class="time">07:30</span>
+      </div>
+      <div class="msg-item" style="opacity:0.6">
+        <span class="dot" style="background:#ddd"></span>
+        <div class="content"><div class="t">📰 冬季养生小贴士</div><div class="s">做好这五点，健康过冬</div></div>
+        <span class="time">昨天</span>
+      </div>
+    </div>
+  </div>
+  <div class="code-section">
+    <h3>📄 WXML 首页结构</h3>
+    <pre><span class="tag">&lt;scroll-view</span> <span class="kw">class</span>=<span class="str">"home"</span> <span class="kw">scroll-y</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"banner"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"greeting"</span><span class="tag">&gt;</span>👋 上午好，{{userName}}<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"quick-status"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"qs"</span> <span class="kw">wx:for</span>=<span class="str">"{{vitals}}"</span> <span class="kw">wx:key</span>=<span class="str">"name"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"v"</span><span class="tag">&gt;</span>{{item.value}}<span class="tag">&lt;/text&gt;</span>
+        <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"l"</span><span class="tag">&gt;</span>{{item.label}}<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"grid"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"item"</span> <span class="kw">wx:for</span>=<span class="str">"{{menus}}"</span> <span class="kw">wx:key</span>=<span class="str">"id"</span>
+          <span class="kw">bindtap</span>=<span class="str">"goPage"</span> <span class="kw">data-url</span>=<span class="str">"{{item.url}}"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"icon"</span><span class="tag">&gt;</span>{{item.icon}}<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"label"</span><span class="tag">&gt;</span>{{item.label}}<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"msg-list"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"msg-item"</span> <span class="kw">wx:for</span>=<span class="str">"{{messages}}"</span>
+          <span class="kw">wx:key</span>=<span class="str">"id"</span> <span class="kw">bindtap</span>=<span class="str">"viewMsg"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"dot {{item.read?'read':''}}"</span><span class="tag">&gt;&lt;/view&gt;</span>
+      <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"content"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"t"</span><span class="tag">&gt;</span>{{item.title}}<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+<span class="tag">&lt;/scroll-view&gt;</span></pre>
+    <h3 style="margin-top:16px;border-top:1px solid #333;padding-top:12px;color:#aaa;font-size:13px">📄 JS 首页逻辑</h3>
+    <pre><span class="kw">Page</span>({
+  <span class="kw">data</span>: { <span class="kw">userName</span>: <span class="str">''</span>, <span class="kw">vitals</span>: [], <span class="kw">menus</span>: [], <span class="kw">messages</span>: [] },
+  <span class="kw">onLoad</span>() {
+    <span class="kw">const</span> user = wx.getStorageSync(<span class="str">'userInfo'</span>);
+    <span class="kw">this</span>.setData({ userName: user.realName });
+    <span class="kw">this</span>.loadVitals();
+    <span class="kw">this</span>.loadMessages();
+  },
+  <span class="kw">async</span> loadVitals() {
+    <span class="kw">const</span> res = await wx.request({
+      url: <span class="str">'https://api.eldercare.com/api/home/vitals'</span>
+    });
+    <span class="kw">if</span> (res.data.code === <span class="num">200</span>) {
+      <span class="kw">this</span>.setData({ vitals: res.data.data });
+    }
+  },
+  <span class="kw">goPage</span>(e) {
+    wx.navigateTo({ url: e.currentTarget.dataset.url });
+  }
+});</pre>
+  </div>
+</div>
+</body>
+</html>

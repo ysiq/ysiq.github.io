@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.8 家属监护管理 - 远程监护</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; flex-direction: column; gap: 30px; }
+.phone { width: 375px; background: #f5f7fa; border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; border: 8px solid #1a1a2e; }
+.statusbar { background: #fff; padding: 12px 20px 6px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #333; }
+.navbar { background: #fff; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #eee; }
+.navbar .back { font-size: 20px; margin-right: 12px; cursor: pointer; }
+.navbar h3 { font-size: 17px; font-weight: 600; flex: 1; }
+.navbar .more { font-size: 20px; cursor: pointer; }
+.body { padding: 16px; }
+.elder-header { background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 16px; padding: 20px; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+.elder-header .avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.elder-header .info { flex: 1; }
+.elder-header .info .name { font-size: 18px; font-weight: 700; }
+.elder-header .info .rel { font-size: 12px; opacity: 0.8; }
+.elder-header .online { padding: 4px 12px; background: rgba(255,255,255,0.2); border-radius: 20px; font-size: 11px; }
+.monitor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.monitor-card { background: #fff; border-radius: 14px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.monitor-card .label { font-size: 11px; color: #999; margin-bottom: 4px; }
+.monitor-card .value { font-size: 20px; font-weight: 700; color: #333; }
+.monitor-card .value .u { font-size: 12px; font-weight: 400; color: #999; }
+.monitor-card .status { font-size: 10px; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-top: 4px; }
+.monitor-card .status.normal { background: #e8f5e9; color: #2e7d32; }
+.monitor-card .status.warn { background: #fff3e0; color: #e65100; }
+.sos-section { background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 16px; padding: 16px; color: #fff; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+.sos-section .left { display: flex; align-items: center; gap: 12px; }
+.sos-section .left .sos-icon { font-size: 32px; }
+.sos-section .left .txt h4 { font-size: 14px; }
+.sos-section .left .txt p { font-size: 11px; opacity: 0.85; }
+.sos-section .btn-call { padding: 8px 20px; background: #fff; color: #e74c3c; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.map-preview { background: #e8ecf4; border-radius: 16px; padding: 16px; margin-bottom: 16px; position: relative; overflow: hidden; }
+.map-preview .map-bg { height: 120px; background: linear-gradient(135deg, #a8c0ff, #d4e0ff); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #555; }
+.map-preview .addr { margin-top: 8px; font-size: 13px; color: #333; display: flex; align-items: center; gap: 6px; }
+.action-list { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.action-list .act { padding: 14px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f5f5f5; cursor: pointer; }
+.action-list .act:last-child { border: none; }
+.action-list .act .icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.action-list .act .txt { flex: 1; }
+.action-list .act .txt .t { font-size: 13px; color: #333; }
+.action-list .act .txt .s { font-size: 11px; color: #999; }
+.wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+.code-section { background: #1e1e2e; border-radius: 12px; padding: 20px; width: 700px; }
+.code-section h3 { color: #aaa; font-size: 13px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+.code-section pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-section .kw { color: #cba6f7; } .code-section .str { color: #a6e3a1; } .code-section .cm { color: #6c7086; } .code-section .num { color: #fab387; } .code-section .tag { color: #f38ba8; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="phone">
+    <div class="statusbar">9:41 <span>🔋 100%</span></div>
+    <div class="navbar"><span class="back">←</span><h3>家属监护</h3><span class="more">⋯</span></div>
+    <div class="body">
+      <div class="elder-header">
+        <div class="avatar">👴</div>
+        <div class="info">
+          <div class="name">张建国</div>
+          <div class="rel">与您的关系：父亲</div>
+        </div>
+        <div class="online">🟢 在线</div>
+      </div>
+      <div class="monitor-grid">
+        <div class="monitor-card">
+          <div class="label">❤️ 当前心率</div>
+          <div class="value">76 <span class="u">bpm</span></div>
+          <span class="status normal">正常</span>
+        </div>
+        <div class="monitor-card">
+          <div class="label">🩸 当前血压</div>
+          <div class="value">126/82 <span class="u">mmHg</span></div>
+          <span class="status normal">正常</span>
+        </div>
+        <div class="monitor-card">
+          <div class="label">📊 今日步数</div>
+          <div class="value">3,286 <span class="u">步</span></div>
+          <span class="status normal">良好</span>
+        </div>
+        <div class="monitor-card">
+          <div class="label">🛌 昨日睡眠</div>
+          <div class="value">7.2 <span class="u">小时</span></div>
+          <span class="status normal">充足</span>
+        </div>
+      </div>
+      <div class="sos-section">
+        <div class="left">
+          <div class="sos-icon">🆘</div>
+          <div class="txt"><h4>紧急求助</h4><p>暂无未处理的求助</p></div>
+        </div>
+        <div class="btn-call">历史记录</div>
+      </div>
+      <div class="map-preview">
+        <div class="map-bg">📍 实时位置地图加载中...</div>
+        <div class="addr">📍 河北省保定市竞秀区朝阳南大街 100号</div>
+      </div>
+      <div class="action-list">
+        <div class="act">
+          <div class="icon" style="background:#e3f2fd">📞</div>
+          <div class="txt"><div class="t">呼叫老人</div><div class="s">一键拨打电话</div></div>
+          <span style="color:#999">→</span>
+        </div>
+        <div class="act">
+          <div class="icon" style="background:#e8f5e9">💬</div>
+          <div class="txt"><div class="t">发送关怀留言</div><div class="s">语音或文字消息</div></div>
+          <span style="color:#999">→</span>
+        </div>
+        <div class="act">
+          <div class="icon" style="background:#fce4ec">📊</div>
+          <div class="txt"><div class="t">查看健康档案</div><div class="s">历史健康记录汇总</div></div>
+          <span style="color:#999">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="code-section">
+    <h3>📄 WXML 家属监护页</h3>
+    <pre><span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"guardian-page"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"elder-header"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;image</span> <span class="kw">class</span>=<span class="str">"avatar"</span> <span class="kw">src</span>=<span class="str">"{{elder.avatar}}"</span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"info"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"name"</span><span class="tag">&gt;</span>{{elder.name}}<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"rel"</span><span class="tag">&gt;</span>与您的关系：{{elder.relation}}<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"online {{elder.online?'on':'off'}}"</span><span class="tag">&gt;</span>
+      {{elder.online?'在线':'离线'}}<span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"monitor-grid"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"card"</span> <span class="kw">wx:for</span>=<span class="str">"{{monitors}}"</span> <span class="kw">wx:key</span>=<span class="str">"key"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"label"</span><span class="tag">&gt;</span>{{item.label}}<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"value"</span><span class="tag">&gt;</span>{{item.value}}<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"sos-section"</span> <span class="kw">bindtap</span>=<span class="str">"viewSosHistory"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"left"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"icon"</span><span class="tag">&gt;</span>🆘<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;text&gt;</span>紧急求助<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"badge"</span><span class="tag">&gt;</span>{{sosCount}} 条记录<span class="tag">&lt;/text&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+<span class="tag">&lt;/view&gt;</span></pre>
+    <h3 style="margin-top:16px;border-top:1px solid #333;padding-top:12px;color:#aaa;font-size:13px">📄 JS 实时监测</h3>
+    <pre><span class="kw">const</span> app = getApp();
+<span class="kw">Page</span>({
+  <span class="kw">data</span>: { <span class="kw">elder</span>: {}, <span class="kw">monitors</span>: [], <span class="kw">sosCount</span>: <span class="num">0</span> },
+  <span class="kw">onLoad</span>() {
+    <span class="kw">const</span> bindId = wx.getStorageSync(<span class="str">'bindId'</span>);
+    <span class="kw">this</span>.loadElderInfo(bindId);
+    <span class="kw">this</span>.startRealtimeMonitor();
+  },
+  <span class="kw">startRealtimeMonitor</span>() {
+    <span class="cm">// WebSocket 实时推送最新监护数据</span>
+    <span class="kw">const</span> ws = wx.connectSocket({
+      url: <span class="str">'wss://api.eldercare.com/ws/monitor'</span>
+    });
+    ws.onMessage(<span class="kw">res</span> =&gt; {
+      <span class="kw">const</span> data = JSON.parse(res.data);
+      <span class="kw">if</span> (data.type === <span class="str">'vitals'</span>) {
+        <span class="kw">this</span>.setData({ monitors: data.payload });
+      }
+      <span class="kw">if</span> (data.type === <span class="str">'alert'</span>) {
+        wx.showModal({
+          title: <span class="str">'⚠️ 异常预警'</span>,
+          content: data.msg,
+          confirmText: <span class="str">'查看详情'</span>
+        });
+      }
+    });
+  },
+  <span class="kw">onUnload</span>() { wx.closeSocket(); }
+});</pre>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.4 数据上传管理 - 健康数据录入</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; flex-direction: column; gap: 30px; }
+.phone { width: 375px; background: #f5f7fa; border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; border: 8px solid #1a1a2e; }
+.statusbar { background: #fff; padding: 12px 20px 6px; display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #333; }
+.navbar { background: #fff; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #eee; }
+.navbar .back { font-size: 20px; margin-right: 12px; cursor: pointer; }
+.navbar h3 { font-size: 17px; font-weight: 600; flex: 1; }
+.navbar .more { font-size: 20px; cursor: pointer; }
+.body { padding: 16px; }
+.method-select { display: flex; background: #fff; border-radius: 12px; padding: 4px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.method-select .m { flex: 1; text-align: center; padding: 10px 0; border-radius: 10px; font-size: 13px; cursor: pointer; }
+.method-select .m.active { background: #4a90d9; color: #fff; font-weight: 600; }
+.form-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 16px; }
+.form-card h4 { font-size: 14px; color: #333; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.form-card .field { margin-bottom: 14px; }
+.form-card .field label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+.form-card .field .input-row { display: flex; gap: 8px; align-items: center; }
+.form-card .field input { flex: 1; padding: 10px 12px; border: 1px solid #e8e8e8; border-radius: 10px; font-size: 14px; outline: none; }
+.form-card .field input:focus { border-color: #4a90d9; }
+.form-card .field .unit { font-size: 13px; color: #999; min-width: 30px; }
+.form-card .field .tag { font-size: 11px; color: #999; margin-top: 4px; }
+.btn-submit { width: 100%; padding: 14px; background: linear-gradient(135deg, #4a90d9, #357abd); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.history { background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.history h4 { font-size: 14px; color: #333; margin-bottom: 12px; }
+.history .item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
+.history .item:last-child { border: none; }
+.history .item .val { font-weight: 600; color: #333; }
+.history .item .time { color: #999; }
+.wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+.code-section { background: #1e1e2e; border-radius: 12px; padding: 20px; width: 700px; }
+.code-section h3 { color: #aaa; font-size: 13px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+.code-section pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-section .kw { color: #cba6f7; } .code-section .str { color: #a6e3a1; } .code-section .cm { color: #6c7086; } .code-section .num { color: #fab387; } .code-section .tag { color: #f38ba8; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="phone">
+    <div class="statusbar">9:41 <span>🔋 100%</span></div>
+    <div class="navbar"><span class="back">←</span><h3>数据上传</h3><span class="more">⋯</span></div>
+    <div class="body">
+      <div class="method-select">
+        <div class="m active">📝 手动输入</div>
+        <div class="m">📡 设备上传</div>
+      </div>
+      <div class="form-card">
+        <h4>❤️ 生命体征录入</h4>
+        <div class="field">
+          <label>收缩压 (高压)</label>
+          <div class="input-row">
+            <input type="number" placeholder="如 120" value="128">
+            <span class="unit">mmHg</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>舒张压 (低压)</label>
+          <div class="input-row">
+            <input type="number" placeholder="如 80" value="82">
+            <span class="unit">mmHg</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>心率</label>
+          <div class="input-row">
+            <input type="number" placeholder="如 72" value="76">
+            <span class="unit">次/分</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>血糖</label>
+          <div class="input-row">
+            <input type="number" placeholder="如 5.6" value="5.8">
+            <span class="unit">mmol/L</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>体温</label>
+          <div class="input-row">
+            <input type="number" placeholder="如 36.5" value="36.6">
+            <span class="unit">℃</span>
+          </div>
+        </div>
+        <div class="field"><div class="tag">* 数据将保存至云端健康档案</div></div>
+        <button class="btn-submit">✅ 提交数据</button>
+      </div>
+      <div class="history">
+        <h4>📋 最近上传记录</h4>
+        <div class="item"><span>收缩压 128 / 舒张压 82</span><span class="time">10:32</span></div>
+        <div class="item"><span>心率 76 次/分</span><span class="time">10:32</span></div>
+        <div class="item"><span>血糖 5.8 mmol/L</span><span class="time">10:32</span></div>
+        <div class="item"><span>体温 36.6 ℃</span><span class="time">10:30</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="code-section">
+    <h3>📄 WXML 数据上传页面</h3>
+    <pre><span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"upload-page"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"method-bar"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"m {{method===0?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"switchMethod"</span> <span class="kw">data-m</span>=<span class="str">"0"</span><span class="tag">&gt;</span>手动输入<span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"m {{method===1?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"switchMethod"</span> <span class="kw">data-m</span>=<span class="str">"1"</span><span class="tag">&gt;</span>设备上传<span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"form-group"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"field"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"label"</span><span class="tag">&gt;</span>收缩压 (高压)<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;input</span> <span class="kw">type</span>=<span class="str">"digit"</span> <span class="kw">value</span>=<span class="str">"{{sbp}}"</span>
+             <span class="kw">bindinput</span>=<span class="str">"onInput"</span> <span class="kw">data-field</span>=<span class="str">"sbp"</span>
+             <span class="kw">placeholder</span>=<span class="str">"如 120"</span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"field"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"label"</span><span class="tag">&gt;</span>心率<span class="tag">&lt;/text&gt;</span>
+      <span class="tag">&lt;input</span> <span class="kw">type</span>=<span class="str">"digit"</span> <span class="kw">value</span>=<span class="str">"{{heartRate}}"</span>
+             <span class="kw">bindinput</span>=<span class="str">"onInput"</span> <span class="kw">data-field</span>=<span class="str">"heartRate"</span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;button</span> <span class="kw">class</span>=<span class="str">"btn-submit"</span> <span class="kw">bindtap</span>=<span class="str">"submitData"</span><span class="tag">&gt;</span>提交数据<span class="tag">&lt;/button&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+<span class="tag">&lt;/view&gt;</span></pre>
+    <h3 style="margin-top:16px;color:#aaa;font-size:13px;border-top:1px solid #333;padding-top:12px">📄 Java 后端数据接收</h3>
+    <pre><span class="kw">@RestController</span>
+<span class="kw">@RequestMapping</span>(<span class="str">"/api/health"</span>)
+<span class="kw">public class</span> <span class="fn">HealthDataController</span> {
+
+    <span class="kw">@Autowired</span> <span class="kw">private</span> HealthDataService service;
+
+    <span class="kw">@PostMapping</span>(<span class="str">"/upload"</span>)
+    <span class="kw">public</span> Result <span class="fn">uploadHealthData</span>(<span class="kw">@RequestBody</span> HealthDataDTO dto) {
+        <span class="cm">// 数据合法性校验</span>
+        <span class="kw">if</span> (dto.getSbp() &lt; <span class="num">50</span> || dto.getSbp() &gt; <span class="num">250</span>) {
+            <span class="kw">return</span> Result.error(<span class="str">"收缩压数据异常"</span>);
+        }
+        HealthData data = <span class="kw">new</span> HealthData();
+        BeanUtils.copyProperties(dto, data);
+        data.setUserId(CurrentUser.getId());
+        data.setCreateTime(<span class="kw">new</span> Date());
+        service.save(data);
+        <span class="kw">return</span> Result.success(<span class="str">"上传成功"</span>);
+    }
+}</pre>
+  </div>
+</div>
+</body>
+</html>

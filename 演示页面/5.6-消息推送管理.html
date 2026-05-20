@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.6 消息推送管理 - 推送配置</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px; }
+.desktop { width: 1100px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; }
+.titlebar { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+.titlebar .dots { display: flex; gap: 8px; margin-right: 20px; }
+.titlebar .dot { width: 12px; height: 12px; border-radius: 50%; }
+.titlebar .dot.r { background: #ff5f57; } .titlebar .dot.y { background: #ffbd2e; } .titlebar .dot.g { background: #28ca41; }
+.titlebar .title { font-size: 14px; color: #555; }
+.sidebar { width: 220px; background: #2c3e50; float: left; min-height: 650px; padding: 20px 0; }
+.sidebar .logo { padding: 16px 20px; color: #fff; font-size: 18px; font-weight: bold; border-bottom: 1px solid #3d5166; margin-bottom: 10px; }
+.sidebar .logo span { color: #3498db; }
+.sidebar .item { padding: 14px 20px; color: #bdc3c7; cursor: pointer; font-size: 14px; border-left: 3px solid transparent; }
+.sidebar .item.active { background: #34495e; color: #fff; border-left-color: #3498db; }
+.main { margin-left: 220px; padding: 0; }
+.topbar { padding: 16px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.topbar h2 { font-size: 18px; color: #333; }
+.topbar .user { font-size: 13px; color: #999; }
+.content { padding: 24px; }
+.stats-cards { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+.stat { background: #f8f9fa; border-radius: 12px; padding: 16px; text-align: center; }
+.stat .num { font-size: 26px; font-weight: 700; color: #333; }
+.stat .lbl { font-size: 12px; color: #999; margin-top: 4px; }
+.push-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
+.push-card .hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.push-card .hdr h4 { font-size: 14px; }
+.push-card .hdr .switch { width: 44px; height: 24px; background: #4a90d9; border-radius: 12px; position: relative; cursor: pointer; }
+.push-card .hdr .switch::after { content: ''; width: 20px; height: 20px; background: #fff; border-radius: 50%; position: absolute; top: 2px; right: 2px; }
+.push-card .hdr .switch.off { background: #ccc; } .push-card .hdr .switch.off::after { right: auto; left: 2px; }
+.push-card .row { font-size: 13px; color: #666; padding: 4px 0; }
+.push-card .row strong { display: inline-block; width: 70px; color: #333; }
+.push-card .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 11px; }
+.push-card .tag.push { background: #e3f2fd; color: #1565c0; }
+.push-card .tag.alert { background: #fce4ec; color: #c62828; }
+.push-card .tag.med { background: #e8f5e9; color: #2e7d32; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+table th { background: #f8f9fa; padding: 10px 14px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e0e0e0; }
+table td { padding: 10px 14px; border-bottom: 1px solid #f0f0f0; }
+table tr:hover { background: #fafbfc; }
+.code-block { background: #1e1e2e; border-radius: 10px; padding: 20px; margin-top: 20px; }
+.code-block .label { color: #888; font-size: 12px; margin-bottom: 8px; }
+.code-block pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-block .kw { color: #cba6f7; } .code-block .str { color: #a6e3a1; } .code-block .cm { color: #6c7086; } .code-block .num { color: #fab387; } .code-block .pr { color: #f38ba8; }
+.clear { clear: both; }
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="titlebar"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="title">消息推送管理 - 后台管理系统</span></div>
+  <div class="sidebar">
+    <div class="logo">Elder<span>Care</span></div>
+    <div class="item">📋 实现环境</div>
+    <div class="item">👥 用户管理</div>
+    <div class="item active">🔔 消息推送管理</div>
+    <div class="item">⚙️ 系统设置</div>
+    <div class="item">📡 接口管理</div>
+  </div>
+  <div class="main">
+    <div class="topbar"><h2>5.6 消息推送管理</h2><span class="user">管理员 admin | 2026-05-20</span></div>
+    <div class="content">
+      <div class="stats-cards">
+        <div class="stat"><div class="num">1,284</div><div class="lbl">今日推送量</div></div>
+        <div class="stat"><div class="num">36</div><div class="lbl">异常预警</div></div>
+        <div class="stat"><div class="num">124</div><div class="lbl">用药提醒</div></div>
+        <div class="stat"><div class="num">98.6%</div><div class="lbl">送达率</div></div>
+      </div>
+      <div class="push-card">
+        <div class="hdr"><h4>💊 用药提醒推送</h4><div class="switch"></div></div>
+        <div class="row"><strong>推送时间</strong> 每日 08:00 / 12:00 / 18:00</div>
+        <div class="row"><strong>推送对象</strong> <span class="tag med">老人</span> <span class="tag push">家属</span></div>
+        <div class="row"><strong>推送内容</strong> "张建国老人，您有新的用药提醒：阿莫西林 1粒，请按时服用"</div>
+      </div>
+      <div class="push-card">
+        <div class="hdr"><h4>🚨 健康异常预警推送</h4><div class="switch"></div></div>
+        <div class="row"><strong>触发条件</strong> 心率&gt;100 或 收缩压&gt;140 / 舒张压&gt;90 或 血糖异常</div>
+        <div class="row"><strong>推送对象</strong> <span class="tag alert">家属</span> <span class="tag push">管理员</span></div>
+        <div class="row"><strong>推送渠道</strong> 微信订阅消息 + 短信通知</div>
+      </div>
+      <div class="push-card">
+        <div class="hdr"><h4>🆘 紧急求助推送</h4><div class="switch"></div></div>
+        <div class="row"><strong>触发方式</strong> 老人点击"一键求助"按钮</div>
+        <div class="row"><strong>推送对象</strong> <span class="tag alert">家属</span> <span class="tag alert">管理员</span></div>
+        <div class="row"><strong>响应要求</strong> 5分钟内未确认则短信+电话通知</div>
+      </div>
+      <h4 style="font-size:14px;margin:16px 0 10px">📋 推送记录</h4>
+      <table>
+        <tr><th>时间</th><th>类型</th><th>推送内容</th><th>接收人</th><th>状态</th></tr>
+        <tr><td>10:32:15</td><td><span class="tag med">用药提醒</span></td><td>服用降压药 1片</td><td>张建国</td><td>✅ 已送达</td></tr>
+        <tr><td>09:15:00</td><td><span class="tag alert">异常预警</span></td><td>心率偏高(105次/分)</td><td>张明(家属)</td><td>✅ 已送达</td></tr>
+        <tr><td>08:00:01</td><td><span class="tag med">用药提醒</span></td><td>阿莫西林 1粒</td><td>张建国</td><td>✅ 已送达</td></tr>
+        <tr><td>昨天 22:10</td><td><span class="tag push">系统通知</span></td><td>设备离线提醒</td><td>管理员赵</td><td>✅ 已送达</td></tr>
+      </table>
+      <div class="code-block">
+        <div class="label">📄 消息推送服务 PushService.java</div>
+        <pre><span class="kw">@Service</span>
+<span class="kw">public class</span> <span class="fn">PushService</span> {
+
+    <span class="kw">@Autowired</span> <span class="kw">private</span> WxTemplateMsgSender wxSender;
+    <span class="kw">@Autowired</span> <span class="kw">private</span> SmsSender smsSender;
+
+    <span class="kw">public void</span> <span class="fn">pushHealthAlert</span>(HealthAlertDTO alert) {
+        <span class="cm">// 1. 查询绑定家属</span>
+        List&lt;FamilyBind&gt; families = familyBindMapper
+                .selectByElderId(alert.getElderId());
+        <span class="cm">// 2. 组装微信模板消息</span>
+        WxTemplateMsg msg = <span class="kw">new</span> WxTemplateMsg();
+        msg.setTemplateId(<span class="str">"TEMPLATE_HEALTH_ALERT"</span>);
+        msg.setPage(<span class="str">"/pages/health/detail"</span>);
+        msg.setData(Map.of(
+            <span class="str">"thing1"</span>, Map.of(<span class="str">"value"</span>, <span class="str">"健康异常预警"</span>),
+            <span class="str">"thing2"</span>, Map.of(<span class="str">"value"</span>, alert.getAlertMsg())
+        ));
+        <span class="cm">// 3. 逐个推送</span>
+        <span class="kw">for</span> (FamilyBind fb : families) {
+            msg.setToUser(fb.getFamilyOpenId());
+            wxSender.send(msg);
+        }
+        <span class="cm">// 4. 记录推送日志</span>
+        pushLogMapper.insert(<span class="kw">new</span> PushLog(alert));
+    }
+}</pre>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>

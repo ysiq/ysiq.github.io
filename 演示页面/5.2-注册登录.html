@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.2 注册登录 - 登录页面</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; flex-direction: column; gap: 30px; }
+.phone { width: 375px; background: #fff; border-radius: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); overflow: hidden; position: relative; border: 8px solid #1a1a2e; }
+.statusbar { background: #4a90d9; padding: 12px 20px 6px; display: flex; justify-content: space-between; color: #fff; font-size: 12px; font-weight: 600; }
+.header { background: linear-gradient(135deg, #4a90d9, #357abd); padding: 24px 24px 40px; text-align: center; color: #fff; }
+.header h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.header p { font-size: 13px; opacity: 0.85; }
+.body { padding: 0 24px 24px; margin-top: -20px; }
+.tabs { display: flex; background: #f0f4f8; border-radius: 10px; padding: 3px; margin-bottom: 24px; }
+.tabs .tab { flex: 1; text-align: center; padding: 8px 0; font-size: 13px; border-radius: 8px; cursor: pointer; }
+.tabs .tab.active { background: #fff; color: #4a90d9; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.form { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.form .field { margin-bottom: 16px; }
+.form .field label { font-size: 13px; color: #555; display: block; margin-bottom: 4px; }
+.form .field input { width: 100%; padding: 12px 14px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; outline: none; transition: 0.2s; }
+.form .field input:focus { border-color: #4a90d9; }
+.form .role-select { display: flex; gap: 8px; margin-bottom: 16px; }
+.form .role-select .role { flex: 1; text-align: center; padding: 10px 0; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 13px; cursor: pointer; }
+.form .role-select .role.active { border-color: #4a90d9; background: #eaf2fb; color: #4a90d9; font-weight: 600; }
+.btn { width: 100%; padding: 14px; background: #4a90d9; color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.btn:hover { background: #357abd; }
+.btn-reg { margin-top: 12px; width: 100%; padding: 12px; background: none; border: 1px solid #4a90d9; color: #4a90d9; border-radius: 12px; font-size: 14px; cursor: pointer; }
+.footer-link { text-align: center; margin-top: 16px; font-size: 12px; color: #999; }
+.code-section { background: #1e1e2e; border-radius: 12px; padding: 20px; width: 700px; }
+.code-section h3 { color: #aaa; font-size: 13px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+.code-section pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-section .wxml { color: #f9e2af; } .code-section .js { color: #89b4fa; } .code-section .cm { color: #6c7086; }
+.code-section .kw { color: #cba6f7; } .code-section .str { color: #a6e3a1; } .code-section .tag { color: #f38ba8; }
+.wrapper { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="phone">
+    <div class="statusbar">9:41 <span>🔋 100%</span></div>
+    <div class="header">
+      <h1>👋 欢迎回来</h1>
+      <p>老人安全健康监测系统</p>
+    </div>
+    <div class="body">
+      <div class="tabs">
+        <div class="tab active">登录</div>
+        <div class="tab">注册</div>
+      </div>
+      <div class="form">
+        <div class="role-select">
+          <div class="role">老人</div>
+          <div class="role active">家属</div>
+          <div class="role">管理员</div>
+        </div>
+        <div class="field">
+          <label>账号</label>
+          <input type="text" placeholder="请输入账号" value="zhang_san">
+        </div>
+        <div class="field">
+          <label>密码</label>
+          <input type="password" placeholder="请输入密码" value="••••••••">
+        </div>
+        <button class="btn">登 录</button>
+        <button class="btn-reg">还没有账号？立即注册</button>
+        <div class="footer-link">忘记密码？</div>
+      </div>
+    </div>
+  </div>
+  <div class="code-section">
+    <h3>📄 WXML 登录页面</h3>
+    <pre><span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"login-page"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"header"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"title"</span><span class="tag">&gt;</span>欢迎回来<span class="tag">&lt;/text&gt;</span>
+    <span class="tag">&lt;text</span> <span class="kw">class</span>=<span class="str">"sub"</span><span class="tag">&gt;</span>老人安全健康监测系统<span class="tag">&lt;/text&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"tabs"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"tab {{tabIndex===0?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"switchTab"</span> <span class="kw">data-index</span>=<span class="str">"0"</span><span class="tag">&gt;</span>登录<span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"tab {{tabIndex===1?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"switchTab"</span> <span class="kw">data-index</span>=<span class="str">"1"</span><span class="tag">&gt;</span>注册<span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"role-group"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"role {{role===1?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"selectRole"</span> <span class="kw">data-role</span>=<span class="str">"1"</span><span class="tag">&gt;</span>老人<span class="tag">&lt;/view&gt;</span>
+    <span class="tag">&lt;view</span> <span class="kw">class</span>=<span class="str">"role {{role===2?'active':''}}"</span>
+          <span class="kw">bindtap</span>=<span class="str">"selectRole"</span> <span class="kw">data-role</span>=<span class="str">"2"</span><span class="tag">&gt;</span>家属<span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;/view&gt;</span>
+  <span class="tag">&lt;input</span> <span class="kw">class</span>=<span class="str">"input"</span> <span class="kw">placeholder</span>=<span class="str">"请输入账号"</span>
+         <span class="kw">bindinput</span>=<span class="str">"onInput"</span> <span class="kw">data-field</span>=<span class="str">"username"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;input</span> <span class="kw">class</span>=<span class="str">"input"</span> <span class="kw">password</span> <span class="kw">placeholder</span>=<span class="str">"请输入密码"</span>
+         <span class="kw">bindinput</span>=<span class="str">"onInput"</span> <span class="kw">data-field</span>=<span class="str">"password"</span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;button</span> <span class="kw">class</span>=<span class="str">"btn-login"</span> <span class="kw">bindtap</span>=<span class="str">"handleLogin"</span><span class="tag">&gt;</span>登 录<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/view&gt;</span></pre>
+    <h3 style="margin-top:16px;color:#aaa;font-size:13px;border-top:1px solid #333;padding-top:12px">📄 JS 登录逻辑</h3>
+    <pre><span class="kw">Page</span>({
+  <span class="kw">data</span>: { <span class="kw">tabIndex</span>: <span class="num">0</span>, <span class="kw">role</span>: <span class="num">2</span>,
+           <span class="kw">username</span>: <span class="str">''</span>, <span class="kw">password</span>: <span class="str">''</span> },
+  <span class="kw">onInput</span>(e) {
+    <span class="kw">const</span> { field } = e.currentTarget.dataset;
+    <span class="kw">this</span>.setData({ [field]: e.detail.value });
+  },
+  <span class="kw">async</span> handleLogin() {
+    <span class="kw">const</span> { username, password, role } = <span class="kw">this</span>.data;
+    <span class="kw">if</span> (!username || !password) {
+      wx.showToast({ title: <span class="str">'请完整填写'</span>, icon: <span class="str">'none'</span> }); <span class="kw">return</span>;
+    }
+    wx.showLoading({ title: <span class="str">'登录中...'</span> });
+    <span class="kw">try</span> {
+      <span class="kw">const</span> res = await wx.request({
+        url: <span class="str">'https://api.eldercare.com/login'</span>,
+        method: <span class="str">'POST'</span>,
+        data: { username, password, role }
+      });
+      wx.hideLoading();
+      <span class="kw">if</span> (res.data.code === <span class="num">200</span>) {
+        wx.setStorageSync(<span class="str">'token'</span>, res.data.token);
+        wx.reLaunch({ url: <span class="str">'/pages/index/index'</span> });
+      }
+    } <span class="kw">catch</span> (err) {
+      wx.hideLoading();
+      wx.showToast({ title: <span class="str">'登录失败'</span>, icon: <span class="str">'error'</span> });
+    }
+  }
+});</pre>
+  </div>
+</div>
+</body>
+</html>

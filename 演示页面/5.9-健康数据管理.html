@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.9 健康数据管理 - 后台数据管理</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px; }
+.desktop { width: 1100px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; }
+.titlebar { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+.titlebar .dots { display: flex; gap: 8px; margin-right: 20px; }
+.titlebar .dot { width: 12px; height: 12px; border-radius: 50%; }
+.titlebar .dot.r { background: #ff5f57; } .titlebar .dot.y { background: #ffbd2e; } .titlebar .dot.g { background: #28ca41; }
+.titlebar .title { font-size: 14px; color: #555; }
+.sidebar { width: 220px; background: #2c3e50; float: left; min-height: 680px; padding: 20px 0; }
+.sidebar .logo { padding: 16px 20px; color: #fff; font-size: 18px; font-weight: bold; border-bottom: 1px solid #3d5166; }
+.sidebar .logo span { color: #3498db; }
+.sidebar .item { padding: 14px 20px; color: #bdc3c7; cursor: pointer; font-size: 14px; border-left: 3px solid transparent; }
+.sidebar .item.active { background: #34495e; color: #fff; border-left-color: #3498db; }
+.main { margin-left: 220px; padding: 0; }
+.topbar { padding: 16px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.topbar h2 { font-size: 18px; color: #333; }
+.topbar .user { font-size: 13px; color: #999; }
+.content { padding: 24px; }
+.filter-bar { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+.filter-bar select, .filter-bar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 13px; }
+.filter-bar .btn { padding: 8px 18px; background: #3498db; color: #fff; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; }
+.filter-bar .btn.export { background: #27ae60; }
+.overview { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 20px; }
+.ov-card { background: #f8f9fa; border-radius: 10px; padding: 14px; text-align: center; }
+.ov-card .num { font-size: 22px; font-weight: 700; }
+.ov-card .lbl { font-size: 11px; color: #999; margin-top: 2px; }
+.ov-card:nth-child(1) .num { color: #e74c3c; }
+.ov-card:nth-child(2) .num { color: #3498db; }
+.ov-card:nth-child(3) .num { color: #27ae60; }
+.ov-card:nth-child(4) .num { color: #f39c12; }
+.ov-card:nth-child(5) .num { color: #9b59b6; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table th { background: #f8f9fa; padding: 10px 12px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e0e0e0; }
+table td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
+table tr:hover { background: #fafbfc; }
+.tag { padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+.tag.normal { background: #e8f5e9; color: #2e7d32; }
+.tag.warn { background: #fff3e0; color: #e65100; }
+.tag.danger { background: #fce4ec; color: #c62828; }
+.code-block { background: #1e1e2e; border-radius: 10px; padding: 20px; margin-top: 20px; }
+.code-block .label { color: #888; font-size: 12px; margin-bottom: 8px; }
+.code-block pre { color: #cdd6f4; font-size: 13px; line-height: 1.5; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-block .kw { color: #cba6f7; } .code-block .str { color: #a6e3a1; } .code-block .cm { color: #6c7086; } .code-block .num { color: #fab387; } .code-block .pr { color: #f38ba8; }
+.clear { clear: both; }
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="titlebar"><div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div><span class="title">健康数据管理 - 后台管理系统</span></div>
+  <div class="sidebar">
+    <div class="logo">Elder<span>Care</span></div>
+    <div class="item">📋 实现环境</div>
+    <div class="item">👥 用户管理</div>
+    <div class="item">🔔 消息推送</div>
+    <div class="item active">📊 健康数据管理</div>
+    <div class="item">📡 接口管理</div>
+  </div>
+  <div class="main">
+    <div class="topbar"><h2>5.9 健康数据管理</h2><span class="user">管理员 admin | 2026-05-20</span></div>
+    <div class="content">
+      <div class="overview">
+        <div class="ov-card"><div class="num">1,284</div><div class="lbl">总记录数</div></div>
+        <div class="ov-card"><div class="num">36</div><div class="lbl">今日新增</div></div>
+        <div class="ov-card"><div class="num">12</div><div class="lbl">异常数据</div></div>
+        <div class="ov-card"><div class="num">8</div><div class="lbl">待审核</div></div>
+        <div class="ov-card"><div class="num">98</div><div class="lbl">关联老人</div></div>
+      </div>
+      <div class="filter-bar">
+        <select><option>全部老人</option><option>张建国</option><option>王秀英</option></select>
+        <select><option>全部类型</option><option>心率</option><option>血压</option><option>血糖</option><option>体温</option></select>
+        <select><option>全部状态</option><option>正常</option><option>异常</option></select>
+        <input type="date" value="2026-05-01">
+        <span style="color:#999">至</span>
+        <input type="date" value="2026-05-20">
+        <button class="btn">🔍 查询</button>
+        <button class="btn export">📥 导出</button>
+      </div>
+      <table>
+        <thead><tr><th>ID</th><th>老人</th><th>类型</th><th>数值</th><th>状态</th><th>上传时间</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr><td>10234</td><td>张建国</td><td>❤️ 心率</td><td>76 bpm</td><td><span class="tag normal">正常</span></td><td>2026-05-20 10:32</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+          <tr><td>10233</td><td>张建国</td><td>🩸 血压</td><td>126/82 mmHg</td><td><span class="tag normal">正常</span></td><td>2026-05-20 10:32</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+          <tr><td>10230</td><td>王秀英</td><td>❤️ 心率</td><td>105 bpm</td><td><span class="tag warn">偏高</span></td><td>2026-05-20 09:15</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+          <tr><td>10228</td><td>张建国</td><td>🍬 血糖</td><td>5.8 mmol/L</td><td><span class="tag normal">正常</span></td><td>2026-05-20 08:00</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+          <tr><td>10225</td><td>王秀英</td><td>🌡️ 体温</td><td>38.2 ℃</td><td><span class="tag danger">发热</span></td><td>2026-05-19 22:10</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+          <tr><td>10220</td><td>李德福</td><td>🩸 血压</td><td>158/95 mmHg</td><td><span class="tag danger">高危</span></td><td>2026-05-19 18:30</td><td><span style="color:#3498db;cursor:pointer">详情</span></td></tr>
+        </tbody>
+      </table>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:#999">
+        <span>共 1,284 条记录</span>
+        <div style="display:flex;gap:6px">
+          <span style="padding:4px 10px;border:1px solid #ddd;border-radius:4px;cursor:pointer">‹</span>
+          <span style="padding:4px 10px;background:#3498db;color:#fff;border-radius:4px">1</span>
+          <span style="padding:4px 10px;border:1px solid #ddd;border-radius:4px;cursor:pointer">2</span>
+          <span style="padding:4px 10px;border:1px solid #ddd;border-radius:4px;cursor:pointer">3</span>
+          <span style="padding:4px 10px;border:1px solid #ddd;border-radius:4px;cursor:pointer">›</span>
+        </div>
+      </div>
+      <div class="code-block">
+        <div class="label">📄 HealthDataMapper.xml - 数据查询</div>
+        <pre><span class="cm">&lt;!-- 健康数据分页查询 --&gt;</span>
+<span class="kw">&lt;select</span> <span class="kw">id</span>=<span class="str">"selectHealthDataList"</span>
+        <span class="kw">resultType</span>=<span class="str">"com.elder.entity.HealthData"</span><span class="kw">&gt;</span>
+  SELECT h.*, u.real_name AS elderName
+  FROM health_data h
+  LEFT JOIN user u ON h.user_id = u.user_id
+  <span class="kw">&lt;where&gt;</span>
+    <span class="kw">&lt;if</span> <span class="kw">test</span>=<span class="str">"elderId != null"</span><span class="kw">&gt;</span>
+      AND h.user_id = #{elderId}
+    <span class="kw">&lt;/if&gt;</span>
+    <span class="kw">&lt;if</span> <span class="kw">test</span>=<span class="str">"type != null and type != ''"</span><span class="kw">&gt;</span>
+      AND h.data_type = #{type}
+    <span class="kw">&lt;/if&gt;</span>
+    <span class="kw">&lt;if</span> <span class="kw">test</span>=<span class="str">"startTime != null"</span><span class="kw">&gt;</span>
+      AND h.create_time &gt;= #{startTime}
+    <span class="kw">&lt;/if&gt;</span>
+    <span class="kw">&lt;if</span> <span class="kw">test</span>=<span class="str">"endTime != null"</span><span class="kw">&gt;</span>
+      AND h.create_time &lt;= #{endTime}
+    <span class="kw">&lt;/if&gt;</span>
+    <span class="kw">&lt;if</span> <span class="kw">test</span>=<span class="str">"status != null"</span><span class="kw">&gt;</span>
+      AND h.status = #{status}
+    <span class="kw">&lt;/if&gt;</span>
+  <span class="kw">&lt;/where&gt;</span>
+  ORDER BY h.create_time DESC
+<span class="kw">&lt;/select&gt;</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>

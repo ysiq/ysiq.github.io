@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5.1 实现环境 - 开发环境概览</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: #e8ecf1; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 30px; }
+.desktop { width: 1100px; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; }
+.titlebar { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; border-bottom: 1px solid #ddd; }
+.titlebar .dots { display: flex; gap: 8px; margin-right: 20px; }
+.titlebar .dot { width: 12px; height: 12px; border-radius: 50%; }
+.titlebar .dot.r { background: #ff5f57; }
+.titlebar .dot.y { background: #ffbd2e; }
+.titlebar .dot.g { background: #28ca41; }
+.titlebar .title { font-size: 14px; color: #555; }
+.sidebar { width: 220px; background: #2c3e50; float: left; min-height: 600px; padding: 20px 0; }
+.sidebar .logo { padding: 16px 20px; color: #fff; font-size: 18px; font-weight: bold; border-bottom: 1px solid #3d5166; margin-bottom: 10px; }
+.sidebar .logo span { color: #3498db; }
+.sidebar .item { padding: 14px 20px; color: #bdc3c7; cursor: pointer; font-size: 14px; border-left: 3px solid transparent; }
+.sidebar .item.active { background: #34495e; color: #fff; border-left-color: #3498db; }
+.sidebar .item:hover { background: #34495e; color: #fff; }
+.main { margin-left: 220px; padding: 0; }
+.topbar { padding: 16px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+.topbar h2 { font-size: 18px; color: #333; }
+.topbar .user { font-size: 13px; color: #999; }
+.content { padding: 24px; }
+.env-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.env-card { background: #f8f9fa; border-radius: 10px; padding: 20px; border: 1px solid #e9ecef; }
+.env-card h4 { font-size: 14px; color: #6c757d; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.env-card h4 .icon { font-size: 20px; }
+.env-card .detail { font-size: 14px; color: #333; padding: 4px 0; }
+.env-card .detail strong { display: inline-block; width: 80px; color: #555; }
+.code-block { background: #1e1e2e; border-radius: 10px; padding: 20px; overflow-x: auto; margin-top: 16px; }
+.code-block .label { color: #888; font-size: 12px; margin-bottom: 8px; text-transform: uppercase; }
+.code-block pre { color: #cdd6f4; font-size: 13px; line-height: 1.6; font-family: 'Cascadia Code', 'Fira Code', monospace; }
+.code-block .kw { color: #cba6f7; }
+.code-block .str { color: #a6e3a1; }
+.code-block .cm { color: #6c7086; }
+.code-block .num { color: #fab387; }
+.code-block .fn { color: #89b4fa; }
+.clear { clear: both; }
+</style>
+</head>
+<body>
+<div class="desktop">
+  <div class="titlebar">
+    <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <span class="title">开发环境配置 - 管理系统</span>
+  </div>
+  <div class="sidebar">
+    <div class="logo">Elder<span>Care</span></div>
+    <div class="item active">📋 实现环境</div>
+    <div class="item">👥 用户管理</div>
+    <div class="item">📊 数据管理</div>
+    <div class="item">⚙️ 系统设置</div>
+    <div class="item">📡 接口管理</div>
+  </div>
+  <div class="main">
+    <div class="topbar">
+      <h2>5.1 实现环境</h2>
+      <span class="user">管理员 | 2026-05-20</span>
+    </div>
+    <div class="content">
+      <div class="env-grid">
+        <div class="env-card">
+          <h4><span class="icon">🖥️</span> 开发环境</h4>
+          <div class="detail"><strong>操作系统</strong> Windows 10 / Windows 11</div>
+          <div class="detail"><strong>开发工具</strong> 微信开发者工具、IDEA、VS Code</div>
+          <div class="detail"><strong>开发语言</strong> Java</div>
+          <div class="detail"><strong>后端框架</strong> SpringBoot</div>
+          <div class="detail"><strong>前端技术</strong> WXML、WXSS、JavaScript</div>
+          <div class="detail"><strong>数据库</strong> MySQL 8.0</div>
+          <div class="detail"><strong>编译环境</strong> JDK 1.8</div>
+        </div>
+        <div class="env-card">
+          <h4><span class="icon">☁️</span> 运行环境</h4>
+          <div class="detail"><strong>服务器</strong> CentOS / Windows Server</div>
+          <div class="detail"><strong>运行容器</strong> Tomcat</div>
+          <div class="detail"><strong>客户端</strong> 微信客户端</div>
+          <div class="detail"><strong>适配设备</strong> 安卓 / iOS 全机型</div>
+          <div class="detail"><strong>网络</strong> 4G / 5G / WiFi</div>
+          <div class="detail"><strong>硬件要求</strong> 普通智能手机</div>
+        </div>
+      </div>
+      <div class="env-card" style="margin-bottom:16px">
+        <h4><span class="icon">📦</span> 技术栈一览</h4>
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <tr style="background:#f0f0f0"><td style="padding:8px 12px;border:1px solid #ddd"><strong>后端</strong></td><td style="padding:8px 12px;border:1px solid #ddd">Java + SpringBoot + MyBatis</td></tr>
+          <tr><td style="padding:8px 12px;border:1px solid #ddd"><strong>前端</strong></td><td style="padding:8px 12px;border:1px solid #ddd">微信小程序原生（WXML / WXSS / JS）</td></tr>
+          <tr style="background:#f0f0f0"><td style="padding:8px 12px;border:1px solid #ddd"><strong>数据库</strong></td><td style="padding:8px 12px;border:1px solid #ddd">MySQL 8.0 + MongoDB云数据库</td></tr>
+          <tr><td style="padding:8px 12px;border:1px solid #ddd"><strong>架构</strong></td><td style="padding:8px 12px;border:1px solid #ddd">B/S架构 + 前后端分离</td></tr>
+        </table>
+      </div>
+      <div class="code-block">
+        <div class="label">📄 application.yml 配置文件</div>
+        <pre><span class="cm"># 服务端核心配置</span>
+<span class="kw">server</span>:
+  <span class="kw">port</span>: <span class="num">8080</span>
+
+<span class="kw">spring</span>:
+  <span class="kw">datasource</span>:
+    <span class="kw">url</span>: <span class="str">jdbc:mysql://localhost:3306/elder_care?useSSL=false&serverTimezone=Asia/Shanghai</span>
+    <span class="kw">username</span>: <span class="str">root</span>
+    <span class="kw">password</span>: <span class="str">********</span>
+    <span class="kw">driver-class-name</span>: <span class="str">com.mysql.cj.jdbc.Driver</span>
+
+  <span class="kw">data</span>:
+    <span class="kw">mongodb</span>:
+      <span class="kw">uri</span>: <span class="str">mongodb+srv://elder:****@cluster.xxxxx.mongodb.net/health_data</span>
+
+<span class="kw">logging</span>:
+  <span class="kw">level</span>:
+    <span class="kw">com.elder</span>: <span class="str">DEBUG</span></pre>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>

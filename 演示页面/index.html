@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>老人安全健康监测系统 - 功能演示总览</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, 'Microsoft YaHei', sans-serif; }
+body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 40px 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { color: #fff; font-size: 28px; text-align: center; margin-bottom: 8px; }
+.subtitle { color: rgba(255,255,255,0.8); text-align: center; font-size: 14px; margin-bottom: 40px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.15); transition: 0.3s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+.card .top { padding: 20px; }
+.card .top .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+.card .top .badge.phone { background: #e3f2fd; color: #1565c0; }
+.card .top .badge.desktop { background: #fce4ec; color: #c62828; }
+.card .top h3 { font-size: 16px; color: #333; margin-bottom: 6px; }
+.card .top p { font-size: 12px; color: #999; line-height: 1.5; }
+.card .top .icon-big { font-size: 32px; margin-bottom: 8px; }
+.card .preview { height: 160px; background: #f5f7fa; display: flex; align-items: center; justify-content: center; border-top: 1px solid #eee; font-size: 13px; color: #999; position: relative; overflow: hidden; }
+.card .preview .mini-phone { width: 70px; height: 130px; border: 3px solid #333; border-radius: 14px; position: relative; }
+.card .preview .mini-phone::before { content: ''; position: absolute; top: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 3px; background: #333; border-radius: 3px; }
+.card .preview .mini-screen { width: 60px; height: 100px; background: linear-gradient(135deg, #4a90d9, #357abd); margin: 14px auto 0; border-radius: 4px; }
+.card .preview .mini-desktop { width: 120px; height: 80px; border: 3px solid #2c3e50; border-radius: 4px; position: relative; }
+.card .preview .mini-desktop::before { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 30px; height: 5px; background: #2c3e50; border-radius: 0 0 4px 4px; }
+.card .bottom { padding: 12px 20px; background: #f8f9fa; display: flex; justify-content: space-between; align-items: center; }
+.card .bottom a { text-decoration: none; font-size: 13px; font-weight: 500; }
+.card .bottom .link { color: #4a90d9; }
+.card .bottom .link:hover { color: #357abd; }
+.card .bottom .section-num { font-size: 11px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏥 老人安全健康监测系统</h1>
+  <p class="subtitle">第5章 · 系统实现 — 功能模块配图演示总览</p>
+  <div class="grid">
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">🖥️</div>
+        <span class="badge desktop">管理端</span>
+        <h3>实现环境</h3>
+        <p>开发环境、运行环境、技术栈及核心配置文件展示</p>
+      </div>
+      <div class="preview"><div class="mini-desktop"><div style="background:#3498db;width:100%;height:20px;border-radius:2px 2px 0 0"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.1</span><a href="5.1-实现环境.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">🔐</div>
+        <span class="badge phone">小程序端</span>
+        <h3>注册登录</h3>
+        <p>用户注册、登录，支持老人/家属/管理员三种身份切换</p>
+      </div>
+      <div class="preview"><div class="mini-phone"><div class="mini-screen"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.2</span><a href="5.2-注册登录.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">👥</div>
+        <span class="badge desktop">管理端</span>
+        <h3>用户信息管理</h3>
+        <p>管理员管理用户列表、编辑资料、冻结注销等操作</p>
+      </div>
+      <div class="preview"><div class="mini-desktop"><div style="background:#2c3e50;width:30%;height:100%;float:left"></div><div style="background:#f8f9fa;width:70%;height:20px;float:left;"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.3</span><a href="5.3-用户信息管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">📤</div>
+        <span class="badge phone">小程序端</span>
+        <h3>数据上传管理</h3>
+        <p>手动输入或设备自动上传心率、血压、血糖等健康数据</p>
+      </div>
+      <div class="preview"><div class="mini-phone"><div class="mini-screen"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.4</span><a href="5.4-数据上传管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">📊</div>
+        <span class="badge phone">小程序端</span>
+        <h3>数据查看管理</h3>
+        <p>图表化展示心率、血压等健康数据趋势，支持日/周/月筛选</p>
+      </div>
+      <div class="preview"><div class="mini-phone"><div class="mini-screen"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.5</span><a href="5.5-数据查看管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">🔔</div>
+        <span class="badge desktop">管理端</span>
+        <h3>消息推送管理</h3>
+        <p>配置用药提醒、异常预警、紧急求助等推送规则与记录</p>
+      </div>
+      <div class="preview"><div class="mini-desktop"><div style="background:#f39c12;width:100%;height:20px;border-radius:2px 2px 0 0"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.6</span><a href="5.6-消息推送管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">🏠</div>
+        <span class="badge phone">小程序端</span>
+        <h3>主页面管理</h3>
+        <p>小程序首页，集成健康数据概览、快捷入口、消息通知</p>
+      </div>
+      <div class="preview"><div class="mini-phone"><div class="mini-screen"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.7</span><a href="5.7-小程序主页面管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">👨‍👩‍👧</div>
+        <span class="badge phone">小程序端</span>
+        <h3>家属监护管理</h3>
+        <p>远程查看老人实时健康数据、位置、紧急求助、发送关怀</p>
+      </div>
+      <div class="preview"><div class="mini-phone"><div class="mini-screen"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.8</span><a href="5.8-家属监护管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">📋</div>
+        <span class="badge desktop">管理端</span>
+        <h3>健康数据管理</h3>
+        <p>后台集中查看、检索、导出所有老人的健康监测数据</p>
+      </div>
+      <div class="preview"><div class="mini-desktop"><div style="background:#27ae60;width:100%;height:20px;border-radius:2px 2px 0 0"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.9</span><a href="5.9-健康数据管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <div class="icon-big">🔗</div>
+        <span class="badge desktop">管理端</span>
+        <h3>系统接口管理</h3>
+        <p>Swagger API文档，展示全部后端接口及调用说明</p>
+      </div>
+      <div class="preview"><div class="mini-desktop"><div style="background:#9b59b6;width:100%;height:20px;border-radius:2px 2px 0 0"></div></div></div>
+      <div class="bottom"><span class="section-num">§5.10</span><a href="5.10-系统接口管理.html" class="link" target="_blank">查看演示 →</a></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;color:rgba(255,255,255,0.6);font-size:12px">
+    基于微信小程序的老人安全健康监测系统 · 毕业设计演示 | 曹兴雨 10511240310
+  </div>
+</div>
+</body>
+</html>
